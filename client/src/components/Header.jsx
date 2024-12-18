@@ -18,7 +18,7 @@ const Header = () => {
         <Link to="/">
           <Logo />
         </Link>
-        <span className="absolute right-0 top-5 text-xs text-copy-lighter">
+        <span className="absolute -right-4 top-0 text-xs text-copy-lighter">
           IN
         </span>
       </div>
