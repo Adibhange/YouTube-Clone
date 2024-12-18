@@ -23,10 +23,14 @@ import {
   YTMusicIcon,
   YTPremiumIcon,
 } from "../utils/icons";
+import { useSelector } from "react-redux";
 
 const SideBar = () => {
+  const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
   return (
-    <aside className="scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground w-60 divide-y-2 divide-border overflow-y-auto">
+    <aside
+      className={`${isSidebarOpen ? "visible max-w-[15rem] opacity-100" : "invisible max-w-0 opacity-0"} scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground h-[calc(100vh-4rem)] divide-y-2 divide-border overflow-y-auto transition-all duration-300`}
+    >
       <div className="p-3">
         <button className="flex w-full items-center gap-6 rounded-lg p-2 hover:bg-foreground">
           <HomeIcon /> <span>Home</span>
@@ -119,6 +123,11 @@ const SideBar = () => {
           <FeedbackIcon /> <span>Send Feedback</span>
         </button>
       </div>
+
+      <footer className="p-3 text-center text-sm text-copy-lighter">
+        <p>&copy; 2024 YouTube Clone.</p>
+        <span>Aditya Bhange.</span>
+      </footer>
     </aside>
   );
 };
