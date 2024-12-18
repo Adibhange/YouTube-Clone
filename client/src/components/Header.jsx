@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "./../assets/Logo";
 import {
   HamBurgerMenuIcon,
@@ -9,10 +10,17 @@ import {
 
 const Header = () => {
   return (
-    <header className="fixed left-0 right-0 top-0 flex h-16 items-center justify-between bg-background px-4">
-      <div className="flex items-center gap-6 p-4">
-        <HamBurgerMenuIcon />
-        <Logo />
+    <header className="sticky left-0 right-0 top-0 flex h-16 items-center justify-between bg-background px-4">
+      <div className="relative flex items-center gap-4">
+        <span className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-foreground">
+          <HamBurgerMenuIcon />
+        </span>
+        <Link to="/">
+          <Logo />
+        </Link>
+        <span className="absolute right-0 top-5 text-xs text-copy-lighter">
+          IN
+        </span>
       </div>
 
       <div className="flex w-1/2 items-center justify-center gap-6">
@@ -27,18 +35,23 @@ const Header = () => {
           </button>
         </div>
 
-        <span className="rounded-full bg-foreground px-2 py-2">
+        <span className="cursor-pointer rounded-full bg-foreground p-2">
           <SpeakIcon />
         </span>
       </div>
 
       <div className="flex items-center gap-6">
-        <VerticalThreeDotIcon />
+        <span className="cursor-pointer">
+          <VerticalThreeDotIcon />
+        </span>
 
-        <div className="flex items-center gap-1 rounded-full border border-border px-4 py-2">
+        <Link
+          to="/sign-in"
+          className="flex items-center gap-1 rounded-full border border-border px-4 py-2 transition-colors duration-300 hover:bg-foreground"
+        >
           <ProfileIcon />
           <p>Sign in</p>
-        </div>
+        </Link>
       </div>
     </header>
   );
