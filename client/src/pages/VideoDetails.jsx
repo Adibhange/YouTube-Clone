@@ -181,11 +181,11 @@ const VideoDetails = () => {
       </div>
 
       {/* Sidebar: Recommended Videos */}
-      <aside className="w-full space-y-4 lg:w-1/3">
+      <aside className="w-full space-y-2 lg:w-1/3">
         <h2 className="text-lg font-semibold">Recommended Videos</h2>
-        <div className="space-y-2">
+        <div className="">
           {dummyVideos
-            .filter((v) => v.id !== id)
+            .filter((v) => v.id != id)
             .map((recommendedVideo) => (
               <RecommendedVideo
                 key={recommendedVideo.id}

@@ -21,6 +21,8 @@ const VideoPlayer = ({ video }) => {
         <source src={videoURL} type="video/mp4" />
       </video>
 
+      <p className="text-xl font-semibold">{video.title}</p>
+
       {/* Video Info */}
       <div>
         <div className="flex items-center justify-between">
