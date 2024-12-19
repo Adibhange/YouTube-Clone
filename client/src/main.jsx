@@ -3,16 +3,21 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import "./index.css";
+import store from "./redux/store";
+
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import store from "./redux/store";
+import VideoDetails from "./pages/VideoDetails";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     // errorElement: ,
-    children: [{ index: true, element: <Home /> }],
+    children: [
+      { index: true, element: <Home /> },
+      { path: "video/:id", element: <VideoDetails /> },
+    ],
   },
 ]);
 
