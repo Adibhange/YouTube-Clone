@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import VideoPlayer from "../components/VideoPlayer";
 import RecommendedVideo from "../components/RecommendedVideo";
+import { useState } from "react";
 
 const VideoDetails = () => {
   const dummyVideos = [
@@ -173,11 +174,54 @@ const VideoDetails = () => {
   const { id } = useParams();
   const video = dummyVideos.find((video) => video.id == id);
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleDescription = () => setIsExpanded(!isExpanded);
+
   return (
-    <div className="video-details-page flex flex-col gap-4 px-12 py-4 lg:flex-row">
-      {/* Main Video Section */}
-      <div className="flex-1">
+    <div className="flex flex-col gap-4 px-12 py-4 lg:flex-row">
+      <div className="flex-1 space-y-4">
+        {/* Main Video Section */}
         <VideoPlayer video={video} />
+
+        {/* Video Description */}
+        <div className="space-y-2 rounded-lg bg-foreground px-4 py-2">
+          <div className="flex gap-2 text-sm text-copy-light">
+            <p>{video.views}</p>
+            <p>{video.published}</p>
+          </div>
+          <div className="text-sm text-copy">
+            <p
+              className={`${isExpanded ? "" : "line-clamp-2"} transition-all duration-500`}
+            >
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto,
+              amet maiores autem alias nisi porro voluptates placeat accusamus
+              ipsa. Asperiores mollitia obcaecati quod necessitatibus
+              consequatur doloremque ipsa voluptatem tempore rem! Architecto
+              alias, adipisci aut maxime libero, eveniet ratione neque sapiente,
+              ducimus modi cumque facere fuga facilis exercitationem similique
+              culpa expedita perspiciatis minima mollitia excepturi voluptatibus
+              a nulla ex reiciendis? Illum. Ullam esse laboriosam amet
+              asperiores iusto expedita saepe ipsam ipsum, eum reprehenderit
+              dolores eligendi laudantium? Rem veritatis temporibus, doloremque
+              ducimus, iste pariatur consequuntur omnis dolor mollitia
+              aspernatur quae, deserunt corporis! Possimus laborum ullam eius
+              porro placeat. Ducimus aspernatur rerum maxime! Dolorem eligendi
+              suscipit reiciendis dolorum voluptatem magnam ad dicta aliquam
+              inventore. Porro cumque sunt consequatur placeat quibusdam commodi
+              natus harum. Nostrum atque magnam excepturi, ea omnis minus. Vitae
+              quidem mollitia neque quis corrupti velit vel iste labore ea
+              soluta, eius quasi maiores odio deleniti provident in fugiat
+              eligendi et id?
+            </p>
+            <p
+              onClick={toggleDescription}
+              className="mt-1 cursor-pointer text-end text-sm font-medium text-blue-500 hover:underline"
+            >
+              {isExpanded ? "Show less" : "Show more"}
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Sidebar: Recommended Videos */}
