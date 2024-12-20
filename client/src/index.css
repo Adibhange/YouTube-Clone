@@ -9,3 +9,16 @@ body {
   @apply bg-background;
   @apply text-copy;
 }
+
+body::-webkit-scrollbar {
+  @apply w-2;
+}
+
+body::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+body::-webkit-scrollbar-thumb {
+  @apply bg-foreground;
+  @apply rounded-full;
+}

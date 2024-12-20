@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import VideoPlayer from "../components/VideoPlayer";
 import RecommendedVideo from "../components/RecommendedVideo";
 import { useState } from "react";
+import VideoComment from "../components/VideoComment";
 
 const VideoDetails = () => {
   const dummyVideos = [
@@ -222,6 +223,9 @@ const VideoDetails = () => {
             </p>
           </div>
         </div>
+
+        {/* Comments Section */}
+        <VideoComment />
       </div>
 
       {/* Sidebar: Recommended Videos */}
