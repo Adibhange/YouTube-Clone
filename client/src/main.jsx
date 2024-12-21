@@ -8,6 +8,7 @@ import store from "./redux/store";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import VideoDetails from "./pages/VideoDetails";
+import ChannelDetails from "./pages/ChannelDetails";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "video/:id", element: <VideoDetails /> },
+      { path: "channel/:id", element: <ChannelDetails /> },
     ],
   },
 ]);

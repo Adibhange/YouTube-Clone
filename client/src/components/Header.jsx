@@ -17,7 +17,7 @@ const Header = () => {
     dispatch(toggleSidebar());
   };
   return (
-    <header className="sticky left-0 right-0 top-0 flex h-16 items-center justify-between bg-background px-4">
+    <header className="sticky left-0 right-0 top-0 z-10 flex h-16 items-center justify-between bg-background px-4">
       <div className="relative flex items-center gap-4">
         <span
           className="cursor-pointer rounded-full p-2 transition-colors duration-300 hover:bg-foreground"
