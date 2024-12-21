@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   DislikeVideoIcon,
   DownloadIcon,
@@ -28,13 +29,19 @@ const VideoPlayer = ({ video }) => {
         <div className="flex items-center justify-between">
           {/* Channel Info */}
           <div className="flex items-center gap-4">
-            <img
-              src={video.channelAvatar}
-              alt={video.channel}
-              className="h-12 w-12 rounded-full"
-            />
+            <Link to={`/channel/${video.channel}`}>
+              <img
+                src={video.channelAvatar}
+                alt={video.channel}
+                className="h-12 w-12 rounded-full"
+              />
+            </Link>
+
             <div>
-              <p className="font-medium">{video.channel}</p>
+              <Link to={`/channel/${video.channel}`}>
+                <p className="font-medium">{video.channel}</p>
+              </Link>
+
               <p className="text-sm text-copy-lighter">1.4k subscribers</p>
             </div>
             <button className="ml-auto rounded-full bg-copy px-4 py-2 text-black hover:bg-copy-light">
