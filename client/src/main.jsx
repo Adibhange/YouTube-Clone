@@ -9,6 +9,8 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import VideoDetails from "./pages/VideoDetails";
 import ChannelDetails from "./pages/ChannelDetails";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,8 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "video/:id", element: <VideoDetails /> },
       { path: "channel/:id", element: <ChannelDetails /> },
+      { path: "sign-in", element: <SignIn /> },
+      { path: "sign-up", element: <SignUp /> },
     ],
   },
 ]);
