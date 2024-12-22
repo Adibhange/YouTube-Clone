@@ -11,6 +11,7 @@ import VideoDetails from "./pages/VideoDetails";
 import ChannelDetails from "./pages/ChannelDetails";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import CreateChannel from "./pages/CreateChannel";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: "channel/:id", element: <ChannelDetails /> },
       { path: "sign-in", element: <SignIn /> },
       { path: "sign-up", element: <SignUp /> },
+      { path: "create-channel", element: <CreateChannel /> },
     ],
   },
 ]);

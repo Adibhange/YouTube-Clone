@@ -9,7 +9,7 @@ const SignUp = () => {
         <div className="flex flex-col gap-2">
           <label className="text-xl">Username:</label>
           <input
-            type="userName"
+            type="name"
             id="userName"
             name="userName"
             placeholder="Enter your username"

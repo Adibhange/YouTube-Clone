@@ -32,9 +32,12 @@ const SideBar = () => {
       className={`${isSidebarOpen ? "visible max-w-[15rem] opacity-100" : "invisible max-w-0 opacity-0"} scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground h-[calc(100vh-4rem)] divide-y-2 divide-border overflow-y-auto transition-all duration-300`}
     >
       <div className="p-3">
-        <button className="flex w-full items-center gap-6 rounded-lg p-2 hover:bg-foreground">
+        <Link
+          to="/"
+          className="flex w-full items-center gap-6 rounded-lg p-2 hover:bg-foreground"
+        >
           <HomeIcon /> <span>Home</span>
-        </button>
+        </Link>
         <button className="flex w-full items-center gap-6 rounded-lg p-2 hover:bg-foreground">
           <ShortsIcon /> <span>Shorts</span>
         </button>
