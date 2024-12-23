@@ -121,3 +121,43 @@ export const getChannel = async (req, res, next) => {
 		return next(new HttpError("Channel fetching failed", 400));
 	}
 };
+
+/**
+ *  Update Channel
+ *  PATCH /api/channel/update
+ */
+export const updateChannel = async (req, res, next) => {
+	try {
+		if (!req.user) {
+			return next(new HttpError("Sign in required to edit channel", 401));
+		}
+
+		const channel = await Channel.findOne({ Owner: req.user.userId });
+		if (!channel) {
+			return next(new HttpError("You don't have any channel", 404));
+		}
+
+		const { channelBanner, channelAvatar, description } = req.body;
+
+		// Dynamically update only the fields provided
+		const updatedFields = {};
+
+		if (description) updatedFields.description = description;
+		if (channelBanner) updatedFields.channelBanner = channelBanner;
+		if (channelAvatar) updatedFields.channelAvatar = channelAvatar;
+
+		// Update channel banner
+		const updatedChannel = await Channel.findOneAndUpdate(
+			{ Owner: req.user.userId },
+			updatedFields,
+			{ new: true }
+		);
+
+		res.status(200).json({
+			message: "Channel updated successfully",
+			channel: updatedChannel,
+		});
+	} catch (error) {
+		return next(new HttpError("Channel updating failed", 400));
+	}
+};
