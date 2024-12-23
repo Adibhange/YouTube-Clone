@@ -1,5 +1,7 @@
 import Channel from "../models/channelModel.js";
 import HttpError from "../models/errorModel.js";
+import User from "../models/userModel.js";
+import formatNumber from "../utils/formatNumber.js";
 
 /**
  *  Create New Channel
@@ -43,17 +45,6 @@ export const createChannel = async (req, res, next) => {
 		// Add Random subscribers to channel
 		const randomSubscribers = Math.floor(Math.random() * 1000000) + 1;
 
-		// Format subscribers number in M and K
-		const formatSubscribers = (num) => {
-			if (num >= 1000000) {
-				return `${(num / 1000000).toFixed(1).replace(/\.0$/, "")}M`;
-			} else if (num >= 1000) {
-				return `${(num / 1000).toFixed(1).replace(/\.0$/, "")}K`;
-			} else {
-				return num.toString();
-			}
-		};
-
 		// Create new channel
 		const newChannel = await Channel.create({
 			channelName: channelName.toLowerCase(),
@@ -61,8 +52,13 @@ export const createChannel = async (req, res, next) => {
 			channelBanner,
 			category,
 			channelAvatar,
-			subscribers: formatSubscribers(randomSubscribers),
+			subscribers: formatNumber(randomSubscribers),
 			Owner: req.user.userId,
+		});
+
+		// Add new channel to user
+		await User.findByIdAndUpdate(req.user.userId, {
+			channel: newChannel._id,
 		});
 
 		res.status(201).json({

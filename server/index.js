@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
 import channelRoutes from "./routes/channelRoutes.js";
+import videoRoutes from "./routes/videoRoutes.js";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use(express.json());
 // Routes
 app.use("/api/user", userRoutes);
 app.use("/api/channel", channelRoutes);
+app.use("/api/video", videoRoutes);
 
 // Error Middleware
 app.use(notFound);
