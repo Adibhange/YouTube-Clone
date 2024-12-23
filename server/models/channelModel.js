@@ -25,12 +25,9 @@ const channelSchema = new mongoose.Schema(
 				ref: "Video",
 			},
 		],
-		subscribers: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "User",
-			},
-		],
+		subscribers: {
+			type: String,
+		},
 		Owner: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
