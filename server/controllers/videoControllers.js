@@ -134,9 +134,19 @@ export const updateVideo = async (req, res, next) => {
 
 		const { videoId } = req.params;
 
-		const video = await Video.findById(videoId);
+		const video = await Video.findById(videoId).populate({
+			path: "channel",
+		});
+
 		if (!video) {
 			return next(new HttpError("Video not found", 404));
+		}
+
+		// console.log(video.channel);
+
+		// Check if user is the owner of the video
+		if (video.channel.Owner.toString() !== req.user.userId.toString()) {
+			return next(new HttpError("You can't update this video", 403));
 		}
 
 		const { title, description, thumbnail, duration, videoFile, category } =
@@ -193,6 +203,11 @@ export const deleteVideo = async (req, res, next) => {
 		const video = await Video.findById(videoId);
 		if (!video) {
 			return next(new HttpError("Video not found", 404));
+		}
+
+		// Check if user is the owner of the video
+		if (video.Owner.toString() !== req.user.userId.toString()) {
+			return next(new HttpError("You can't delete this video", 403));
 		}
 
 		// Delete video

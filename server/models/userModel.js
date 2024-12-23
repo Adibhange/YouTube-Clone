@@ -26,12 +26,6 @@ const userSchema = new mongoose.Schema(
 			ref: "Channel",
 			unique: true,
 		},
-		Comments: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "Comment",
-			},
-		],
 		likedVideos: [
 			{
 				type: mongoose.Schema.Types.ObjectId,

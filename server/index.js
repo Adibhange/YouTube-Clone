@@ -6,6 +6,7 @@ import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
 import channelRoutes from "./routes/channelRoutes.js";
 import videoRoutes from "./routes/videoRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use(express.json());
 app.use("/api/user", userRoutes);
 app.use("/api/channel", channelRoutes);
 app.use("/api/video", videoRoutes);
+app.use("/api/comment", commentRoutes);
 
 // Error Middleware
 app.use(notFound);
