@@ -2,6 +2,7 @@ import express from "express";
 const app = express();
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cors from "cors";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
 import channelRoutes from "./routes/channelRoutes.js";
@@ -22,6 +23,9 @@ main()
 async function main() {
 	await mongoose.connect(process.env.MONGO_URL);
 }
+
+const corsOrigin = process.env.CORS_ORIGIN_LOCAL;
+app.use(cors({ credentials: true, origin: corsOrigin }));
 
 // Middleware to parse JSON
 app.use(express.json());

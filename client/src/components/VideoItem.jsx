@@ -1,12 +1,21 @@
 import { Link } from "react-router-dom";
 import { VerticalThreeDotIcon } from "../utils/icons";
+import ReactTimeAgo from "react-time-ago";
+import TimeAgo from "javascript-time-ago";
+
+import en from "javascript-time-ago/locale/en.json";
+import ru from "javascript-time-ago/locale/ru.json";
+
+TimeAgo.addDefaultLocale(en);
+TimeAgo.addLocale(ru);
 
 const VideoItem = ({ video }) => {
+  // console.log(video);
   return (
     <article className="flex flex-col gap-2">
       {/* Thumbnail Section */}
       <div className="group relative">
-        <Link to={`/video/${video.id}`}>
+        <Link to={`/video/${video._id}`}>
           <img
             src={video.thumbnail}
             alt={`Thumbnail of ${video.title}`}
@@ -24,7 +33,7 @@ const VideoItem = ({ video }) => {
         {/* Channel Avatar */}
         <Link to={`/channel/${video.channel}`} className="shrink-0">
           <img
-            src={video.channelAvatar}
+            src={video.channel.channelAvatar}
             alt={`Avatar of ${video.channel}`}
             className="h-10 w-10 rounded-full"
           />
@@ -35,7 +44,7 @@ const VideoItem = ({ video }) => {
           <div className="flex justify-between">
             {/* Title */}
             <Link
-              to={`/video/${video.id}`}
+              to={`/video/${video._id}`}
               className="line-clamp-2 font-medium"
             >
               {video.title}
@@ -51,14 +60,15 @@ const VideoItem = ({ video }) => {
 
           {/* Channel */}
           <Link
-            to={`/channel/${video.channel}`}
+            to={`/channel/${video.channel._id}`}
             className="text-sm text-copy-light hover:text-copy"
           >
-            {video.channel}
+            {video.channel.channelName}
           </Link>
           {/* Views and Published Date */}
-          <p className="text-xs text-copy-lighter">
-            {video.views} • {video.published}
+          <p className="text-sm text-copy-lighter">
+            {video.views} •{" "}
+            <ReactTimeAgo date={new Date(video.createdAt)} locale="en-US" />
           </p>
         </div>
       </div>

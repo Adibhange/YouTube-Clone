@@ -67,7 +67,7 @@ export const uploadVideo = async (req, res, next) => {
  */
 export const getAllVideo = async (req, res, next) => {
 	try {
-		const videos = await Video.find({});
+		const videos = await Video.find({}).populate("channel");
 		if (!videos) {
 			return next(new HttpError("No videos found", 404));
 		}

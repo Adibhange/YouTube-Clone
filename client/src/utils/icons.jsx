@@ -808,3 +808,39 @@ export const SortCommentIcon = ({ size = "24", fill = "currentColor" }) => (
     <path d="M21 6H3V5h18v1zm-6 5H3v1h12v-1zm-6 6H3v1h6v-1z"></path>
   </svg>
 );
+
+export const ForwardArrowIcon = ({ size = "24", fill = "currentColor" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height={size}
+    viewBox="0 0 24 24"
+    width={size}
+    focusable="false"
+    aria-hidden="true"
+    fill={fill}
+    style={{
+      pointerEvents: "none",
+      display: "inherit",
+    }}
+  >
+    <path d="M9.4 18.4l-.7-.7 5.6-5.6-5.7-5.7.7-.7 6.4 6.4-6.3 6.3z"></path>
+  </svg>
+);
+
+export const BackwardArrowIcon = ({ size = "24", fill = "currentColor" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height={size}
+    viewBox="0 0 24 24"
+    width={size}
+    focusable="false"
+    aria-hidden="true"
+    fill={fill}
+    style={{
+      pointerEvents: "none",
+      display: "inherit",
+    }}
+  >
+    <path d="M14.6 18.4l.7-.7-5.6-5.6 5.7-5.7-.7-.7-6.4 6.4 6.3 6.3z"></path>
+  </svg>
+);

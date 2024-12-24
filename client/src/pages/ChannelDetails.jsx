@@ -218,9 +218,9 @@ const ChannelDetails = () => {
       <section className="scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground flex h-[calc(100vh-4rem)] flex-1 flex-col overflow-y-auto p-4">
         <div className="px-16 py-2">
           <img
-            src="https://design-assets.adobeprojectm.com/content/download/express/public/urn:aaid:sc:VA6C2:26f740f6-0e25-4a84-9f2c-736f1f1e859e/component?assetType=TEMPLATE&etag=27d71ab4f504f7d95d105e87ace2c027&revision=0&component_id=a3e6aa09-eb0e-42e9-a966-b39654d8af8b"
+            src="https://img.lovepik.com/background/20211021/large/lovepik-banner-background-image_500457144.jpg"
             alt=""
-            className="h-40 w-full rounded-lg"
+            className="h-40 w-full rounded-lg object-fill"
           />
         </div>
 
