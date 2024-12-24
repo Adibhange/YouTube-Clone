@@ -104,7 +104,7 @@ export const getChannel = async (req, res, next) => {
 		const { channelId } = req.params;
 
 		// Check if channel exists
-		const channel = await Channel.findById(channelId);
+		const channel = await Channel.findById(channelId).populate("videos");
 		if (!channel) {
 			return next(new HttpError("Channel not found", 404));
 		}
