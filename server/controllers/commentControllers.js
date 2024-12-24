@@ -47,7 +47,7 @@ export const getCommentsOfVideo = async (req, res, next) => {
 	try {
 		const { videoId } = req.params;
 
-		const comments = await Comment.find({ video: videoId });
+		const comments = await Comment.find({ video: videoId }).populate("user");
 
 		if (!comments) {
 			return next(new HttpError("No comments found", 404));

@@ -8,8 +8,6 @@ import {
 } from "../utils/icons";
 
 const VideoPlayer = ({ video }) => {
-  const videoURL =
-    "https://res.cloudinary.com/dwhadpjsk/video/upload/v1734591351/YT-Clone/videoplayback_havan9.mp4";
   return (
     <div className="space-y-4">
       {/* Video Player */}
@@ -19,7 +17,7 @@ const VideoPlayer = ({ video }) => {
         controls
         autoPlay
       >
-        <source src={videoURL} type="video/mp4" />
+        <source src={video.videoFile} type="video/mp4" />
       </video>
 
       <p className="text-xl font-semibold">{video.title}</p>
@@ -29,17 +27,17 @@ const VideoPlayer = ({ video }) => {
         <div className="flex items-center justify-between">
           {/* Channel Info */}
           <div className="flex items-center gap-4">
-            <Link to={`/channel/${video.channel}`}>
+            <Link to={`/channel/${video.channel.channelName}`}>
               <img
-                src={video.channelAvatar}
-                alt={video.channel}
+                src={video.channel.channelAvatar}
+                alt={video.channel.channelName}
                 className="h-12 w-12 rounded-full"
               />
             </Link>
 
             <div>
-              <Link to={`/channel/${video.channel}`}>
-                <p className="font-medium">{video.channel}</p>
+              <Link to={`/channel/${video.channel._id}`}>
+                <p className="font-medium">{video.channel.channelName}</p>
               </Link>
 
               <p className="text-sm text-copy-lighter">1.4k subscribers</p>
@@ -54,7 +52,7 @@ const VideoPlayer = ({ video }) => {
             {/* Like/Dislike */}
             <div className="flex items-center gap-4 rounded-full bg-foreground px-4 py-2">
               <button className="flex items-center gap-1 text-copy-light transition hover:text-copy">
-                <LikeVideoIcon /> <span>24</span>
+                <LikeVideoIcon /> <span>{video.likeCount}</span>
               </button>
               {/* Vertical Line Separator */}
               <span className="h-6 border-l-2 border-border"></span>

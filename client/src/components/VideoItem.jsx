@@ -1,13 +1,6 @@
 import { Link } from "react-router-dom";
 import { VerticalThreeDotIcon } from "../utils/icons";
-import ReactTimeAgo from "react-time-ago";
-import TimeAgo from "javascript-time-ago";
-
-import en from "javascript-time-ago/locale/en.json";
-import ru from "javascript-time-ago/locale/ru.json";
-
-TimeAgo.addDefaultLocale(en);
-TimeAgo.addLocale(ru);
+import { PublishedAt } from "./PublishedAt";
 
 const VideoItem = ({ video }) => {
   // console.log(video);
@@ -67,8 +60,7 @@ const VideoItem = ({ video }) => {
           </Link>
           {/* Views and Published Date */}
           <p className="text-sm text-copy-lighter">
-            {video.views} •{" "}
-            <ReactTimeAgo date={new Date(video.createdAt)} locale="en-US" />
+            {video.views} • <PublishedAt createdAt={video.createdAt} />
           </p>
         </div>
       </div>

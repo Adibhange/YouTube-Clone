@@ -1,23 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VerticalThreeDotIcon } from "../utils/icons";
+import axios from "./../../axios.config";
+import { useParams } from "react-router-dom";
+import { PublishedAt } from "./PublishedAt";
 
 const VideoComment = () => {
+  const { id } = useParams();
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
 
-  const handleAddComment = () => {
+  useEffect(() => {
+    const fetchComment = async () => {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_REACT_APP_BASE_URL}/comment/${id}`,
+        );
+        setComments(res.data.comments);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchComment();
+  }, [id]);
+
+  // console.log(comments);
+
+  const handleAddComment = async () => {
     if (commentText.trim()) {
-      setComments([
-        ...comments,
-        {
-          id: Date.now(),
-          username: "User",
-          avatar: "https://via.placeholder.com/40",
-          text: commentText,
-          time: "Just now",
-        },
-      ]);
-      setCommentText("");
+      try {
+        // Post the new comment to the backend
+        const res = await axios.post(
+          `${import.meta.env.VITE_REACT_APP_BASE_URL}/comment/${id}`,
+          { text: commentText },
+        );
+
+        // Add the new comment to the state (or refetch comments to get the updated list)
+        setComments((prevComments) => [
+          ...prevComments,
+          {
+            _id: res.data.comment._id,
+            comment: commentText,
+          },
+        ]);
+
+        // Clear the comment input after posting
+        setCommentText("");
+      } catch (error) {
+        console.log("Failed to add comment:", error);
+      }
     }
   };
 
@@ -56,16 +86,18 @@ const VideoComment = () => {
       <div className="space-y-4">
         {comments.length > 0 ? (
           comments.map((comment) => (
-            <div key={comment.id} className="flex items-start gap-3">
+            <div key={comment._id} className="flex items-start gap-3">
               <img
-                src={comment.avatar}
-                alt={`${comment.username}'s Avatar`}
+                src={comment.user.userAvatar}
+                alt={`${comment.user.userName}'s Avatar`}
                 className="h-10 w-10 rounded-full"
               />
               <div className="flex-1">
-                <p className="font-semibold">{comment.username}</p>
-                <p className="text-sm text-copy-lighter">{comment.time}</p>
-                <p className="mt-1">{comment.text}</p>
+                <p className="font-semibold">{comment.user.userName}</p>
+                <p className="text-sm text-copy-lighter">
+                  <PublishedAt createdAt={comment.createdAt} />
+                </p>
+                <p className="mt-1">{comment.comment}</p>
               </div>
               <div className="ml-auto cursor-pointer text-copy-light">
                 <VerticalThreeDotIcon />
