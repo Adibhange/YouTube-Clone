@@ -20,12 +20,6 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		// As user can have only one channel
-		channel: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Channel",
-			unique: true,
-		},
 		likedVideos: [
 			{
 				type: mongoose.Schema.Types.ObjectId,

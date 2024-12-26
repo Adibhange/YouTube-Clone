@@ -36,7 +36,7 @@ export const createChannel = async (req, res, next) => {
 
 		// check if channel name already exists
 		const channelNameExists = await Channel.findOne({
-			channelName: channelName.toLowerCase(),
+			channelName: channelName,
 		});
 		if (channelNameExists) {
 			return next(new HttpError("This channel name already exists", 422));
@@ -47,7 +47,7 @@ export const createChannel = async (req, res, next) => {
 
 		// Create new channel
 		const newChannel = await Channel.create({
-			channelName: channelName.toLowerCase(),
+			channelName,
 			description,
 			channelBanner,
 			category,

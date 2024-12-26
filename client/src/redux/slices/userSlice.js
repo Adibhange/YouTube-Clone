@@ -29,16 +29,10 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.error = null;
     },
-
-    // Action for handling errors
-    requestFailure: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload; // Store error message
-    },
   },
 });
 
-export const { requestStart, signInSuccess, signOutSuccess, requestFailure } =
+export const { requestStart, signInSuccess, signOutSuccess } =
   userSlice.actions;
 
 export default userSlice.reducer;
