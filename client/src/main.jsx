@@ -13,6 +13,7 @@ import ChannelDetails from "./pages/ChannelDetails";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import CreateChannel from "./pages/CreateChannel";
+import Loader from "./components/Loader.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+    <PersistGate loading={<Loader />} persistor={persistor}>
       <RouterProvider router={router} />
     </PersistGate>
   </Provider>,
