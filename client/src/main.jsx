@@ -14,12 +14,13 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import CreateChannel from "./pages/CreateChannel";
 import Loader from "./components/Loader.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    // errorElement: ,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
       { path: "video/:id", element: <VideoDetails /> },
