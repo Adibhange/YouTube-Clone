@@ -4,6 +4,7 @@ import axios from "./../../axios.config";
 import SideBar from "../components/SideBar";
 import ChannelItems from "../components/ChannelItems";
 import { useNavigate } from "react-router-dom";
+import CreateChannel from "./CreateChannel";
 
 const UserChannel = () => {
   const [userChannel, setUserChannel] = useState(null);
@@ -24,15 +25,14 @@ const UserChannel = () => {
           },
         );
 
-        if (!res.data.channel) {
-          navigate("/create-channel");
-        }
-
         // console.log(res.data.channel);
         setUserChannel(res.data.channel);
         setVideos(res.data.channel.videos);
       } catch (error) {
-        console.log(error);
+        // console.log(error.status);
+        if (error.status === 500) {
+          navigate("/create-channel");
+        }
       }
     };
     fetchUserChannel();
