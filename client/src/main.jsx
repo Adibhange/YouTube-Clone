@@ -15,6 +15,7 @@ import SignUp from "./pages/SignUp";
 import CreateChannel from "./pages/CreateChannel";
 import Loader from "./components/Loader.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import UserChannel from "./pages/UserChannel.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "video/:id", element: <VideoDetails /> },
       { path: "channel/:id", element: <ChannelDetails /> },
+      { path: "user-channel", element: <UserChannel /> },
       { path: "sign-in", element: <SignIn /> },
       { path: "sign-up", element: <SignUp /> },
       { path: "create-channel", element: <CreateChannel /> },

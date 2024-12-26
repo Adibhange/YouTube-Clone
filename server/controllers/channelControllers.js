@@ -81,7 +81,9 @@ export const getUserChannel = async (req, res, next) => {
 			return next(new HttpError("Sign in required to create channel", 401));
 		}
 
-		const channel = await Channel.findOne({ Owner: req.user.userId });
+		const channel = await Channel.findOne({ Owner: req.user.userId }).populate(
+			"videos"
+		);
 		if (!channel) {
 			return next(new HttpError("You don't have any channel", 404));
 		}

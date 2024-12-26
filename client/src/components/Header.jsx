@@ -86,8 +86,9 @@ const Header = () => {
               <div className="absolute right-0 top-12 z-50 w-36 rounded-lg bg-foreground">
                 <div className="p-2">
                   <button className="w-full px-4 py-2 text-left text-sm text-copy-light hover:text-copy">
-                    Go to Channel
+                    <Link to="/user-Channel">Go to Channel</Link>
                   </button>
+
                   <button
                     onClick={handleSignOut}
                     className="w-full px-4 py-2 text-left text-sm text-copy-light hover:text-copy"

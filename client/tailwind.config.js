@@ -4,11 +4,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "rgb(255, 2, 0)",
-        "primary-content": "rgb(255, 255, 255)",
-        "primary-dark": "rgb(204, 2, 0)",
-        "primary-light": "rgb(255, 53, 51)",
-
         background: "rgb(26, 26, 26)",
         foreground: "rgb(38, 38, 38)",
         border: "rgb(64, 64, 64)",
