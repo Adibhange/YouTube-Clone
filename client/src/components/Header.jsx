@@ -9,7 +9,7 @@ import {
 } from "./../utils/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../redux/slices/sidebarSlice";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { signOutSuccess } from "../redux/slices/userSlice";
 
 const Header = () => {
@@ -20,6 +20,7 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
+  const modalRef = useRef();
 
   const handleSidebarToggle = () => {
     dispatch(toggleSidebar());
@@ -29,6 +30,19 @@ const Header = () => {
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
   };
+
+  const handleOutsideClick = (e) => {
+    if (modalRef.current && !modalRef.current.contains(e.target)) {
+      setIsModalOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   // Handle SignOut
   const handleSignOut = () => {
@@ -88,7 +102,7 @@ const Header = () => {
         </span>
 
         {currentUser ? (
-          <div className="relative flex items-center gap-2">
+          <div className="relative flex items-center gap-2" ref={modalRef}>
             <Link to="/upload-video">
               <p className="rounded-full border-2 border-border px-2 py-1">
                 Upload Video

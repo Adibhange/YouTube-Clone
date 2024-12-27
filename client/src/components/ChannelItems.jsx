@@ -2,13 +2,18 @@ import { useSelector } from "react-redux";
 import { SearchIcon, VerticalThreeDotIcon } from "../utils/icons";
 import { PublishedAt } from "./PublishedAt";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import axios from "./../../axios.config";
 
-const ChannelItems = ({ channel, videos }) => {
+const ChannelItems = ({ channel, videos: initialVideos }) => {
   const [owner, setOwner] = useState(true);
+  const [openModalId, setOpenModalId] = useState(null);
+  const [videos, setVideos] = useState(initialVideos);
+
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
 
   const { currentUser } = useSelector((state) => state.user);
+  const modalRef = useRef();
 
   useEffect(() => {
     if (currentUser && channel && currentUser.userData._id === channel.Owner) {
@@ -19,6 +24,40 @@ const ChannelItems = ({ channel, videos }) => {
   }, [currentUser, channel]);
 
   //   console.log(currentUser);
+
+  const handleModalToggle = (id) => {
+    setOpenModalId((prevId) => (prevId === id ? null : id));
+  };
+
+  const handleOutsideClick = (e) => {
+    if (modalRef.current && !modalRef.current.contains(e.target)) {
+      setOpenModalId(null);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
+  // Handle Delete Video
+  const handleDeleteVideo = async (id) => {
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_REACT_APP_BASE_URL}/video/delete/${id}`,
+        {
+          headers: {
+            Authorization: `JWT ${currentUser.token}`,
+          },
+        },
+      );
+      setVideos((prevVideos) => prevVideos.filter((video) => video._id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <section className="flex h-[calc(100vh-4rem)] flex-1 flex-col overflow-y-auto p-4 scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground">
@@ -109,12 +148,38 @@ const ChannelItems = ({ channel, videos }) => {
                       {video.title}
                     </Link>
                     {/* More Options Icon */}
-                    <button
-                      className="text-copy-light hover:text-copy"
-                      aria-label="More options"
-                    >
-                      <VerticalThreeDotIcon />
-                    </button>
+
+                    {owner ? (
+                      <div className="relative" ref={modalRef}>
+                        <button
+                          className="text-copy-light hover:text-copy"
+                          onClick={() => handleModalToggle(video._id)}
+                        >
+                          <VerticalThreeDotIcon />
+                        </button>
+
+                        {openModalId === video._id && (
+                          <div className="absolute left-0 top-6 z-50 w-24 rounded-lg bg-foreground">
+                            <Link to={`/video/edit/${video._id}`}>
+                              <button className="px-4 py-2 text-left text-copy-light hover:text-copy">
+                                Edit
+                              </button>
+                            </Link>
+
+                            <button
+                              className="px-4 py-2 text-left text-copy-light hover:text-copy"
+                              onClick={() => handleDeleteVideo(video._id)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <button className="text-copy-light hover:text-copy">
+                        <VerticalThreeDotIcon />
+                      </button>
+                    )}
                   </div>
 
                   {/* Channel */}
