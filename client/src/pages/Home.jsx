@@ -8,24 +8,27 @@ import { BackwardArrowIcon, ForwardArrowIcon } from "../utils/icons";
 
 const Home = () => {
   const [videos, setVideos] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const categoryContainerRef = useRef(null);
 
+  const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
+
+  // Fetch videos based on selected category
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_REACT_APP_BASE_URL}/video`,
-        );
-
+        const endpoint =
+          selectedCategory === "All"
+            ? `${import.meta.env.VITE_REACT_APP_BASE_URL}/video`
+            : `${import.meta.env.VITE_REACT_APP_BASE_URL}/video/category/${selectedCategory}`;
+        const res = await axios.get(endpoint);
         setVideos(res.data.videos || []);
       } catch (error) {
         console.log(error);
       }
     };
     fetchVideos();
-  }, []);
-
-  const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
+  }, [selectedCategory]);
 
   // Scroll categories with buttons
   const scrollCategories = (direction) => {
@@ -54,12 +57,18 @@ const Home = () => {
             ref={categoryContainerRef}
             className="flex gap-2 overflow-hidden"
           >
-            {categories.map((category) => (
-              <div key={category} className="flex-shrink-0">
-                <p className="whitespace-nowrap rounded-lg bg-foreground p-2">
-                  {category}
-                </p>
-              </div>
+            {["All", ...categories].map((category) => (
+              <button
+                key={category}
+                className={`whitespace-nowrap rounded-lg p-2 ${
+                  selectedCategory === category
+                    ? "text-copy ring-1 ring-border"
+                    : "bg-foreground text-copy-light"
+                } transition-all duration-300`}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </button>
             ))}
           </div>
           <button
@@ -82,7 +91,9 @@ const Home = () => {
             ))}
           </div>
         ) : (
-          <p className="text-center text-xl text-copy-light">No videos found</p>
+          <p className="mt-4 text-center text-xl text-copy-light">
+            No videos found
+          </p>
         )}
       </section>
     </div>

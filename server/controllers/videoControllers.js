@@ -101,6 +101,48 @@ export const getVideoById = async (req, res, next) => {
 };
 
 /**
+ *  Get Video by Category
+ *  GET /api/video/category/:category
+ */
+export const getVideoByCategory = async (req, res, next) => {
+	try {
+		const { category } = req.params;
+
+		const videos = await Video.find({ category }).populate("channel");
+		if (!videos) {
+			return next(new HttpError("No videos found", 404));
+		}
+
+		res.status(200).json({
+			message: "Video fetched successfully",
+			videos,
+		});
+	} catch (error) {
+		return next(new HttpError("Video fetching failed", 400));
+	}
+};
+
+/**
+ *  Get Video by Search
+ *  GET /api/video/search?query=query
+ */
+export const getVideoBySearch = async (req, res, next) => {
+	const query = req.params.query;
+	try {
+		const videos = await Video.find({
+			title: { $regex: query, $options: "i" },
+		}).populate("channel");
+
+		if (!videos) {
+			return next(new HttpError("No videos found", 404));
+		}
+		res.status(200).json({ videos });
+	} catch (error) {
+		return next(new HttpError("Video fetching failed", 400));
+	}
+};
+
+/**
  *  Get Channel Video
  *  GET /api/video/channel/:channelId
  */

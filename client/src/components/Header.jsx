@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "./../assets/Logo";
 import {
   HamBurgerMenuIcon,
@@ -18,6 +18,8 @@ const Header = () => {
   // console.log(currentUser);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const navigate = useNavigate();
 
   const handleSidebarToggle = () => {
     dispatch(toggleSidebar());
@@ -32,6 +34,13 @@ const Header = () => {
   const handleSignOut = () => {
     dispatch(signOutSuccess());
     setIsModalOpen(false);
+  };
+
+  // Handle Search
+  const handleSearch = () => {
+    if (searchInput.trim()) {
+      navigate(`/search/${searchInput}`);
+    }
   };
 
   return (
@@ -57,8 +66,13 @@ const Header = () => {
             type="text"
             placeholder="Search"
             className="w-full rounded-l-full border border-border bg-background px-4 py-2 focus:outline-none"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
-          <button className="rounded-r-full border border-border bg-foreground px-4 py-2">
+          <button
+            onClick={handleSearch}
+            className="rounded-r-full border border-border bg-foreground px-4 py-2"
+          >
             <SearchIcon />
           </button>
         </div>

@@ -17,6 +17,7 @@ import Loader from "./components/Loader.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import UserChannel from "./pages/UserChannel.jsx";
 import EditChannel from "./pages/EditChannel.jsx";
+import SearchedVideo from "./pages/SearchedVideo.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       { path: "sign-up", element: <SignUp /> },
       { path: "create-channel", element: <CreateChannel /> },
       { path: "edit-Channel", element: <EditChannel /> },
+      { path: "search/:query", element: <SearchedVideo /> },
     ],
   },
 ]);
