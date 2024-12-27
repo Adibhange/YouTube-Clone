@@ -26,12 +26,6 @@ const userSchema = new mongoose.Schema(
 				ref: "Video",
 			},
 		],
-		subscribedChannels: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "Channel",
-			},
-		],
 	},
 	{ timestamps: true }
 );

@@ -27,9 +27,10 @@ import { useSelector } from "react-redux";
 
 const SideBar = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <aside
-      className={`${isSidebarOpen ? "visible max-w-[15rem] opacity-100" : "invisible max-w-0 opacity-0"} scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground h-[calc(100vh-4rem)] divide-y-2 divide-border overflow-y-auto transition-all duration-300`}
+      className={`${isSidebarOpen ? "visible max-w-[15rem] opacity-100" : "invisible max-w-0 opacity-0"} h-[calc(100vh-4rem)] divide-y-2 divide-border overflow-y-auto transition-all duration-300 scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground`}
     >
       <div className="p-3">
         <Link
@@ -55,16 +56,18 @@ const SideBar = () => {
         </button>
       </div>
 
-      <div className="p-6">
-        <p className="text-sm">Sign in to like videos and comment</p>
-        <Link
-          to="/sign-in"
-          className="mt-2 flex items-center justify-center gap-1 rounded-full border border-border px-4 py-2 transition-colors duration-300 hover:bg-foreground"
-        >
-          <ProfileIcon />
-          <p>Sign in</p>
-        </Link>
-      </div>
+      {!currentUser && (
+        <div className="p-6">
+          <p className="text-sm">Sign in to like videos and comment</p>
+          <Link
+            to="/sign-in"
+            className="mt-2 flex items-center justify-center gap-1 rounded-full border border-border px-4 py-2 transition-colors duration-300 hover:bg-foreground"
+          >
+            <ProfileIcon />
+            <p>Sign in</p>
+          </Link>
+        </div>
+      )}
 
       <div className="p-3">
         <button className="flex w-full items-center gap-6 rounded-lg p-2 hover:bg-foreground">

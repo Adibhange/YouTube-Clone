@@ -2,6 +2,7 @@ import Channel from "../models/channelModel.js";
 import HttpError from "../models/errorModel.js";
 import Video from "../models/videoModel.js";
 import formatNumber from "../utils/formatNumber.js";
+import User from "./../models/userModel.js";
 
 /**
  *  Upload Video
@@ -224,6 +225,50 @@ export const updateVideo = async (req, res, next) => {
 		res.status(200).json({
 			message: "Video updated successfully",
 			video: updatedVideo,
+		});
+	} catch (error) {
+		return next(new HttpError("Video updating failed", 400));
+	}
+};
+
+/**
+ *  Update Video Likes
+ *  PATCH /api/video/update/likes/:videoId
+ */
+export const updateVideoLikes = async (req, res, next) => {
+	try {
+		if (!req.user) {
+			return next(new HttpError("Sign in required", 401));
+		}
+
+		const { videoId } = req.params;
+		const video = await Video.findById(videoId).populate("channel");
+		if (!video) {
+			return next(new HttpError("Video not found", 404));
+		}
+
+		const user = await User.findById(req.user.userId);
+
+		// Check if user has already liked the video
+		if (user.likedVideos.toString() === videoId.toString()) {
+			// If the video is already liked, remove it from likedVideos and decrease the like count by 1
+			video.likeCount -= 1;
+			user.likedVideos = user.likedVideos.filter(
+				(id) => id.toString() !== videoId.toString()
+			);
+		} else {
+			// If the video is not liked, increase the like count by 1 and add the video ID to likedVideos
+			video.likeCount += 1;
+			user.likedVideos.push(videoId);
+		}
+
+		// Save the changes
+		await video.save();
+		await user.save();
+
+		res.status(200).json({
+			message: "Video like toggled successfully",
+			video,
 		});
 	} catch (error) {
 		return next(new HttpError("Video updating failed", 400));

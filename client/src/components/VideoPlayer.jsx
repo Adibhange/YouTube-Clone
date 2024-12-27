@@ -6,8 +6,51 @@ import {
   LikeVideoIcon,
   ShareIcon,
 } from "../utils/icons";
+import { useSelector } from "react-redux";
+import axios from "./../../axios.config";
+import { useState, useEffect } from "react";
 
 const VideoPlayer = ({ video }) => {
+  const { currentUser } = useSelector((state) => state.user);
+
+  // Local state to manage like status and count
+  const [liked, setLiked] = useState(
+    currentUser?.userData.likedVideos.includes(video._id),
+  );
+  const [likeCount, setLikeCount] = useState(video.likeCount);
+
+  const handleLike = async () => {
+    try {
+      const response = await axios.patch(
+        `${import.meta.env.VITE_REACT_APP_BASE_URL}/video/update/likes/${video._id}`,
+        currentUser.userData,
+        {
+          headers: {
+            Authorization: `JWT ${currentUser.token}`,
+          },
+        },
+      );
+
+      // Update local state based on the response
+      if (liked) {
+        setLiked(false);
+        setLikeCount(likeCount - 1);
+      } else {
+        setLiked(true);
+        setLikeCount(likeCount + 1);
+      }
+    } catch (error) {
+      console.error("Failed to update like status", error);
+    }
+  };
+
+  useEffect(() => {
+    // Synchronize the like status and count with the user state on mount
+    if (currentUser?.userData.likedVideos.includes(video._id)) {
+      setLiked(true);
+    }
+  }, [currentUser, video._id]);
+
   return (
     <div className="space-y-4">
       {/* Video Player */}
@@ -51,8 +94,12 @@ const VideoPlayer = ({ video }) => {
           <div className="flex gap-2 text-sm">
             {/* Like/Dislike */}
             <div className="flex items-center gap-4 rounded-full bg-foreground px-4 py-2">
-              <button className="flex items-center gap-1 text-copy-light transition hover:text-copy">
-                <LikeVideoIcon /> <span>{video.likeCount}</span>
+              <button
+                className="flex items-center gap-1 text-copy-light transition hover:text-copy"
+                onClick={handleLike}
+              >
+                <LikeVideoIcon />
+                <span>{likeCount}</span>
               </button>
               {/* Vertical Line Separator */}
               <span className="h-6 border-l-2 border-border"></span>

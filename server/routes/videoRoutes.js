@@ -7,6 +7,7 @@ import {
 	getVideoById,
 	getVideoBySearch,
 	updateVideo,
+	updateVideoLikes,
 	uploadVideo,
 } from "../controllers/videoControllers.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
@@ -19,6 +20,7 @@ router.get("/category/:category", getVideoByCategory);
 router.get("/search/:query", getVideoBySearch);
 router.get("/channel/:channelId", getChannelVideo);
 router.patch("/update/:videoId", authMiddleware, updateVideo);
+router.patch("/update/likes/:videoId", authMiddleware, updateVideoLikes);
 router.delete("/delete/:videoId", authMiddleware, deleteVideo);
 
 export default router;
