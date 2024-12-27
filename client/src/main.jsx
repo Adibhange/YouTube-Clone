@@ -16,6 +16,7 @@ import CreateChannel from "./pages/CreateChannel";
 import Loader from "./components/Loader.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import UserChannel from "./pages/UserChannel.jsx";
+import EditChannel from "./pages/EditChannel.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: "sign-in", element: <SignIn /> },
       { path: "sign-up", element: <SignUp /> },
       { path: "create-channel", element: <CreateChannel /> },
+      { path: "edit-Channel", element: <EditChannel /> },
     ],
   },
 ]);

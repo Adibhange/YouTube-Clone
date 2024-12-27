@@ -17,12 +17,14 @@ const CreateChannel = () => {
   const [channelBanner, setChannelBanner] = useState(null);
   const [category, setCategory] = useState("");
   const [channelAvatar, setChannelAvatar] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const { currentUser } = useSelector((state) => state.user);
 
   const handleCreateChannel = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (channelBanner.size === 2 * 1024 * 1024) {
       setError("Channel Banner must be less than 2MB.");
@@ -99,6 +101,8 @@ const CreateChannel = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -110,7 +114,7 @@ const CreateChannel = () => {
         <div className="flex flex-col gap-2">
           <label className="text-xl">Channel Name:</label>
           <input
-            type="name"
+            type="text"
             id="channelName"
             name="channelName"
             placeholder="Enter your channel name"
@@ -173,8 +177,9 @@ const CreateChannel = () => {
           type="submit"
           className="w-full rounded-lg bg-[#ff3533] p-2 text-white transition-colors duration-300 hover:bg-[#ff0200]"
           onClick={handleCreateChannel}
+          disabled={isLoading}
         >
-          Create Channel
+          {isLoading ? "Creating Channel..." : "Create Channel"}
         </button>
       </form>
     </section>

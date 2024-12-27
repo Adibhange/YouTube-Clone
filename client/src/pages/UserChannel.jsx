@@ -4,8 +4,6 @@ import axios from "./../../axios.config";
 import SideBar from "../components/SideBar";
 import ChannelItems from "../components/ChannelItems";
 import { useNavigate } from "react-router-dom";
-import CreateChannel from "./CreateChannel";
-
 const UserChannel = () => {
   const [userChannel, setUserChannel] = useState(null);
   const [videos, setVideos] = useState([]);

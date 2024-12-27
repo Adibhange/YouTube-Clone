@@ -18,7 +18,7 @@ const ChannelItems = ({ channel, videos }) => {
     }
   }, [currentUser, channel]);
 
-  console.log(currentUser);
+  //   console.log(currentUser);
 
   return (
     <section className="flex h-[calc(100vh-4rem)] flex-1 flex-col overflow-y-auto p-4 scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground">
@@ -48,7 +48,7 @@ const ChannelItems = ({ channel, videos }) => {
           <p className="text-copy-lighter">
             {channel.subscribers} subscibers • {channel.videos.length} videos
           </p>
-          <p className="text-copy-lighter">I make quality content for you</p>
+          <p className="text-copy-lighter">{channel.description}</p>
 
           {owner || (
             <button className="rounded-full bg-copy px-4 py-2 text-black hover:bg-copy-light">
