@@ -18,6 +18,7 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import UserChannel from "./pages/UserChannel.jsx";
 import EditChannel from "./pages/EditChannel.jsx";
 import SearchedVideo from "./pages/SearchedVideo.jsx";
+import UploadVideo from "./pages/UploadVideo.jsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: "create-channel", element: <CreateChannel /> },
       { path: "edit-Channel", element: <EditChannel /> },
       { path: "search/:query", element: <SearchedVideo /> },
+      { path: "upload-video", element: <UploadVideo /> },
     ],
   },
 ]);

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { categories } from "../utils/categoryData";
 import { app } from "./../utils/firebase";
 import {
   getStorage,
@@ -15,7 +14,6 @@ const CreateChannel = () => {
   const [channelName, setChannelName] = useState("");
   const [description, setDescription] = useState("");
   const [channelBanner, setChannelBanner] = useState(null);
-  const [category, setCategory] = useState("");
   const [channelAvatar, setChannelAvatar] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -86,7 +84,6 @@ const CreateChannel = () => {
           channelName,
           description,
           channelBanner: channelBannerURL,
-          category,
           channelAvatar: channelAvatarURL,
         },
         {
@@ -132,24 +129,7 @@ const CreateChannel = () => {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <label className="text-xl">Channel Category:</label>
-          <select
-            id="category"
-            name="category"
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="" disabled>
-              Select Category
-            </option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </div>
+
         <div className="flex flex-col gap-2">
           <label className="text-xl">Channel Banner:</label>
           <input

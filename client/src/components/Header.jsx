@@ -88,7 +88,13 @@ const Header = () => {
         </span>
 
         {currentUser ? (
-          <div className="relative flex items-center">
+          <div className="relative flex items-center gap-2">
+            <Link to="/upload-video">
+              <p className="rounded-full border-2 border-border px-2 py-1">
+                Upload Video
+              </p>
+            </Link>
+
             <img
               src={currentUser.userData.userAvatar}
               alt="Avatar"
