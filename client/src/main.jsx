@@ -19,6 +19,7 @@ import UserChannel from "./pages/UserChannel.jsx";
 import EditChannel from "./pages/EditChannel.jsx";
 import SearchedVideo from "./pages/SearchedVideo.jsx";
 import UploadVideo from "./pages/UploadVideo.jsx";
+import UpdateVideo from "./pages/UpdateVideo.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       { path: "edit-Channel", element: <EditChannel /> },
       { path: "search/:query", element: <SearchedVideo /> },
       { path: "upload-video", element: <UploadVideo /> },
+      { path: "video/edit/:videoId", element: <UpdateVideo /> },
     ],
   },
 ]);
