@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "./../../axios.config";
 import { useDispatch, useSelector } from "react-redux";
 import { requestStart, signInSuccess } from "../redux/slices/userSlice";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,9 +29,10 @@ const SignIn = () => {
       if (user) {
         dispatch(signInSuccess(user));
         navigate("/");
+        toast.success(res.data.message);
       }
     } catch (error) {
-      setError(error.response?.data?.message || "Sign in failed");
+      toast.error(error.response?.data?.message || "Sign in failed");
     }
   };
 

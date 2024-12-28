@@ -78,7 +78,7 @@ export const getUserChannel = async (req, res, next) => {
 	try {
 		// Check user is sign in
 		if (!req.user) {
-			return next(new HttpError("Sign in required to create channel", 401));
+			return next(new HttpError("Sign in required", 401));
 		}
 
 		const channel = await Channel.findOne({ Owner: req.user.userId }).populate(

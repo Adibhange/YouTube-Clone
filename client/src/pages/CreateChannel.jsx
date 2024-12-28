@@ -9,6 +9,7 @@ import {
 import axios from "./../../axios.config";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const CreateChannel = () => {
   const [channelName, setChannelName] = useState("");
@@ -25,12 +26,12 @@ const CreateChannel = () => {
     setIsLoading(true);
 
     if (channelBanner.size === 2 * 1024 * 1024) {
-      setError("Channel Banner must be less than 2MB.");
+      toast.error("Channel Banner must be less than 2MB.");
       return;
     }
 
     if (channelAvatar.size > 2 * 1024 * 1024) {
-      setError("Channel Avatar must be less than 2MB.");
+      toast.error("Channel Avatar must be less than 2MB.");
       return;
     }
 
@@ -94,10 +95,11 @@ const CreateChannel = () => {
       );
 
       if (res.status === 201) {
+        toast.success(res.data.message);
         navigate("/user-channel");
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     } finally {
       setIsLoading(false);
     }

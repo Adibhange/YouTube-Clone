@@ -10,6 +10,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import axios from "./../../axios.config";
+import { toast } from "react-toastify";
 
 const UploadVideo = () => {
   const [videoName, setVideoName] = useState("");
@@ -28,12 +29,12 @@ const UploadVideo = () => {
     setIsLoading(true);
 
     if (videoThumbnail.size === 2 * 1024 * 1024) {
-      setError("Channel Banner must be less than 2MB.");
+      toast.error("Channel Banner must be less than 2MB.");
       return;
     }
 
     if (videoFile.size === 10 * 1024 * 1024) {
-      setError("Channel Banner must be less than 10MB.");
+      toast.error("Channel Banner must be less than 10MB.");
       return;
     }
 
@@ -93,9 +94,10 @@ const UploadVideo = () => {
 
       if (res.status === 201) {
         navigate("/user-channel");
+        toast.success(res.data.message);
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     } finally {
       setIsLoading(false);
     }

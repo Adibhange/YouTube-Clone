@@ -8,6 +8,7 @@ import {
 } from "firebase/storage";
 import axios from "./../../axios.config";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [userAvatar, setUserAvatar] = useState(null);
@@ -15,7 +16,6 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -23,8 +23,8 @@ const SignUp = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (userAvatar.size > 2 * 1024 * 1024) {
-      setError("User Avatar must be less than 2MB.");
+    if (userAvatar && userAvatar.size > 2 * 1024 * 1024) {
+      toast.error("User Avatar must be less than 2MB.");
       return;
     }
 
@@ -66,9 +66,10 @@ const SignUp = () => {
       const newUser = res.data;
       if (newUser) {
         navigate("/sign-in");
+        toast.success("Sign up successful");
       }
     } catch (error) {
-      setError(error.response?.data?.message || "Sign up failed.");
+      toast.error(error.response?.data?.message || "Sign up failed.");
     } finally {
       setIsLoading(false);
     }

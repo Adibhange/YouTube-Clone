@@ -10,6 +10,7 @@ import {
 import axios from "./../../axios.config";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const EditChannel = () => {
   const [channelName, setChannelName] = useState("");
@@ -42,7 +43,7 @@ const EditChannel = () => {
         setChannelBannerPreview(channelBanner);
         setChannelAvatarPreview(channelAvatar);
       } catch (error) {
-        console.log(error);
+        toast.error(error.response.data.message);
       }
     };
 
@@ -52,6 +53,16 @@ const EditChannel = () => {
   const handleEditChannel = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
+    if (channelBanner && channelBanner.size === 2 * 1024 * 1024) {
+      toast.error("Channel Banner must be less than 2MB.");
+      return;
+    }
+
+    if (channelAvatar && channelAvatar.size > 2 * 1024 * 1024) {
+      toast.error("Channel Avatar must be less than 2MB.");
+      return;
+    }
 
     try {
       const storage = getStorage(app);
@@ -100,9 +111,10 @@ const EditChannel = () => {
 
       if (res.status === 200) {
         navigate("/user-channel");
+        toast.success(res.data.message);
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     } finally {
       setIsLoading(false);
     }

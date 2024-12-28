@@ -4,6 +4,7 @@ import { PublishedAt } from "./PublishedAt";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import axios from "./../../axios.config";
+import { toast } from "react-toastify";
 
 const ChannelItems = ({ channel, videos: initialVideos }) => {
   const [owner, setOwner] = useState(true);
@@ -45,7 +46,7 @@ const ChannelItems = ({ channel, videos: initialVideos }) => {
   // Handle Delete Video
   const handleDeleteVideo = async (id) => {
     try {
-      await axios.delete(
+      const res = await axios.delete(
         `${import.meta.env.VITE_REACT_APP_BASE_URL}/video/delete/${id}`,
         {
           headers: {
@@ -53,9 +54,15 @@ const ChannelItems = ({ channel, videos: initialVideos }) => {
           },
         },
       );
-      setVideos((prevVideos) => prevVideos.filter((video) => video._id !== id));
+
+      if (res.status === 200) {
+        setVideos((prevVideos) =>
+          prevVideos.filter((video) => video._id !== id),
+        );
+        toast.success(res.data.message);
+      }
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     }
   };
 

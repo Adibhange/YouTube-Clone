@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../redux/slices/sidebarSlice";
 import { useEffect, useRef, useState } from "react";
 import { signOutSuccess } from "../redux/slices/userSlice";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const Header = () => {
   const handleSignOut = () => {
     dispatch(signOutSuccess());
     setIsModalOpen(false);
+    toast.success("Sign out successful");
   };
 
   // Handle Search
@@ -119,7 +121,10 @@ const Header = () => {
             {isModalOpen && (
               <div className="absolute right-0 top-12 z-50 w-36 rounded-lg bg-foreground">
                 <div className="p-2">
-                  <button className="w-full px-4 py-2 text-left text-sm text-copy-light hover:text-copy">
+                  <button
+                    className="w-full px-4 py-2 text-left text-sm text-copy-light hover:text-copy"
+                    onClick={handleModalToggle}
+                  >
                     <Link to="/user-channel">Go to Channel</Link>
                   </button>
 

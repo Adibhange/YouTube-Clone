@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import VideoComment from "../components/VideoComment";
 import axios from "./../../axios.config";
 import { PublishedAt } from "../components/PublishedAt";
+import { toast } from "react-toastify";
 
 const VideoDetails = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -20,7 +21,7 @@ const VideoDetails = () => {
         );
         setVideo(res.data.video);
       } catch (error) {
-        console.log(error);
+        toast.error(error.response.data.message);
       }
     };
 
@@ -31,7 +32,7 @@ const VideoDetails = () => {
         );
         setAllVideos(res.data.videos);
       } catch (error) {
-        console.log(error);
+        toast.error(error.response.data.message);
       }
     };
 

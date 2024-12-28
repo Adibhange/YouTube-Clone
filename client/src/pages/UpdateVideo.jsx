@@ -10,6 +10,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import axios from "../../axios.config";
+import { toast } from "react-toastify";
 
 const UpdateVideo = () => {
   const [videoName, setVideoName] = useState("");
@@ -20,7 +21,6 @@ const UpdateVideo = () => {
   const [videoThumbnailPreview, setVideoThumbnailPreview] = useState("");
   const [videoFile, setVideoFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [existingData, setExistingData] = useState(null);
 
   const navigate = useNavigate();
@@ -46,25 +46,23 @@ const UpdateVideo = () => {
         setCategory(data.category);
         setDuration(data.duration);
         setVideoThumbnailPreview(data.thumbnail);
-      } catch (err) {
-        console.error(err);
-        setError("Failed to fetch video details.");
+      } catch (error) {
+        toast.error(error.response.data.message);
       }
     };
     fetchVideoDetails();
   }, [videoId, currentUser.token]);
 
   if (videoThumbnail && videoThumbnail.size > 2 * 1024 * 1024) {
-    setError("Thumbnail must be less than 2MB.");
+    toast.error("Thumbnail must be less than 2MB.");
   }
 
   if (videoFile && videoFile.size > 10 * 1024 * 1024) {
-    setError("Video file must be less than 10MB.");
+    toast.error("Video file must be less than 10MB.");
   }
 
   const handleUpdateVideo = async (e) => {
     e.preventDefault();
-    setError(null);
     setIsLoading(true);
 
     try {
@@ -129,10 +127,10 @@ const UpdateVideo = () => {
 
       if (res.status === 200) {
         navigate("/user-channel");
+        toast.success(res.data.message);
       }
-    } catch (err) {
-      console.error(err);
-      setError("An error occurred while updating the video.");
+    } catch (error) {
+      toast.error(error.response.data.message);
     } finally {
       setIsLoading(false);
     }
