@@ -20,6 +20,7 @@ import EditChannel from "./pages/EditChannel.jsx";
 import SearchedVideo from "./pages/SearchedVideo.jsx";
 import UploadVideo from "./pages/UploadVideo.jsx";
 import UpdateVideo from "./pages/UpdateVideo.jsx";
+import PrivateRoute from "./components/PrivateRoutes.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,14 +31,34 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "video/:id", element: <VideoDetails /> },
       { path: "channel/:id", element: <ChannelDetails /> },
-      { path: "user-channel", element: <UserChannel /> },
+      { path: "search/:query", element: <SearchedVideo /> },
       { path: "sign-in", element: <SignIn /> },
       { path: "sign-up", element: <SignUp /> },
-      { path: "create-channel", element: <CreateChannel /> },
-      { path: "edit-Channel", element: <EditChannel /> },
-      { path: "search/:query", element: <SearchedVideo /> },
-      { path: "upload-video", element: <UploadVideo /> },
-      { path: "video/edit/:videoId", element: <UpdateVideo /> },
+      {
+        path: "user-channel",
+        element: <PrivateRoute />,
+        children: [{ index: true, element: <UserChannel /> }],
+      },
+      {
+        path: "create-channel",
+        element: <PrivateRoute />,
+        children: [{ index: true, element: <CreateChannel /> }],
+      },
+      {
+        path: "edit-Channel",
+        element: <PrivateRoute />,
+        children: [{ index: true, element: <EditChannel /> }],
+      },
+      {
+        path: "upload-video",
+        element: <PrivateRoute />,
+        children: [{ index: true, element: <UploadVideo /> }],
+      },
+      {
+        path: "video/edit/:videoId",
+        element: <PrivateRoute />,
+        children: [{ index: true, element: <UpdateVideo /> }],
+      },
     ],
   },
 ]);

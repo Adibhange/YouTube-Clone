@@ -40,7 +40,7 @@ const SearchedVideo = () => {
                     <img
                       src={video.thumbnail}
                       alt={video.title}
-                      className="h-full w-full rounded-lg object-cover"
+                      className="h-full w-full rounded-lg"
                     />
                   </Link>
                 </div>
