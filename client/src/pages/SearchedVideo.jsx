@@ -33,7 +33,10 @@ const SearchedVideo = () => {
         {videos.length > 0 ? (
           <div className="flex cursor-pointer flex-col gap-3">
             {videos.map((video) => (
-              <div className="mx-auto flex w-[90%] items-start gap-3 rounded-lg p-2 transition duration-200 ease-in-out hover:bg-foreground">
+              <div
+                key={video._id}
+                className="mx-auto flex w-[90%] items-start gap-3 rounded-lg p-2 transition duration-200 ease-in-out hover:bg-foreground"
+              >
                 {/* Video Thumbnail */}
                 <div className="h-72 w-2/5 flex-shrink-0">
                   <Link to={`/video/${video._id}`}>
