@@ -198,10 +198,10 @@ const Header = () => {
         ) : (
           <Link
             to="/sign-in"
-            className="flex items-center gap-1 rounded-full border border-border px-4 py-2 transition-colors duration-300 hover:bg-foreground"
+            className="flex items-center gap-1 rounded-full border border-border p-1 text-xs transition-colors duration-300 hover:bg-foreground sm:px-4 sm:py-2 sm:text-base"
           >
             <ProfileIcon />
-            <p>Sign in</p>
+            <p>Sign In</p>
           </Link>
         )}
       </div>

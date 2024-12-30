@@ -67,7 +67,7 @@ const VideoPlayer = ({ video }) => {
 
       {/* Video Info */}
       <div>
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
           {/* Channel Info */}
           <div className="flex items-center gap-2 sm:gap-4">
             <Link to={`/channel/${video.channel.channelName}`}>
@@ -91,7 +91,7 @@ const VideoPlayer = ({ video }) => {
           </div>
 
           {/* Actions: Like, Dislike, Share, etc. */}
-          <div className="flex gap-2 text-sm">
+          <div className="flex justify-between gap-2 text-sm">
             {/* Like/Dislike */}
             <div className="flex items-center gap-4 rounded-full bg-foreground px-4 py-2">
               <button
@@ -113,7 +113,7 @@ const VideoPlayer = ({ video }) => {
               <button className="hidden items-center gap-1 rounded-full bg-foreground px-4 py-2 text-copy-light transition hover:text-copy sm:flex">
                 <ShareIcon /> <span>Share</span>
               </button>
-              <button className="hidden items-center gap-1 rounded-full bg-foreground px-4 py-2 text-copy-light transition hover:text-copy sm:flex">
+              <button className="flex items-center gap-1 rounded-full bg-foreground px-4 py-2 text-copy-light transition hover:text-copy">
                 <DownloadIcon /> <span>Download</span>
               </button>
               <button className="rounded-full bg-foreground p-2 text-copy-light transition hover:text-copy">

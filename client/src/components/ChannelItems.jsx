@@ -88,7 +88,7 @@ const ChannelItems = ({ channel, videos: initialVideos }) => {
               {channel.channelName}
             </p>
             {owner && (
-              <button className="rounded-md border-2 border-border px-4 py-1 hover:bg-foreground">
+              <button className="hidden rounded-md border-2 border-border px-4 py-1 hover:bg-foreground sm:block">
                 <Link to="/edit-channel">Edit Channel</Link>
               </button>
             )}
@@ -103,6 +103,12 @@ const ChannelItems = ({ channel, videos: initialVideos }) => {
               Subscribe
             </button>
           )}
+
+          {owner && (
+            <button className="block rounded-md border-2 border-border px-4 py-1 hover:bg-foreground sm:hidden">
+              <Link to="/edit-channel">Edit Channel</Link>
+            </button>
+          )}
         </div>
       </div>
 
@@ -111,11 +117,21 @@ const ChannelItems = ({ channel, videos: initialVideos }) => {
         <p className="cursor-pointer text-copy transition hover:text-copy">
           Videos
         </p>
-        <p className="cursor-not-allowed text-copy-light">Shorts</p>
-        <p className="cursor-not-allowed text-copy-light">Live</p>
-        <p className="cursor-not-allowed text-copy-light">Podcasts</p>
-        <p className="cursor-not-allowed text-copy-light">Playlists</p>
-        <p className="cursor-not-allowed text-copy-light">Community</p>
+        <p className="hidden cursor-not-allowed text-copy-light sm:block">
+          Shorts
+        </p>
+        <p className="hidden cursor-not-allowed text-copy-light sm:block">
+          Live
+        </p>
+        <p className="hidden cursor-not-allowed text-copy-light sm:block">
+          Podcasts
+        </p>
+        <p className="hidden cursor-not-allowed text-copy-light sm:block">
+          Playlists
+        </p>
+        <p className="hidden cursor-not-allowed text-copy-light sm:block">
+          Community
+        </p>
         <p className="cursor-not-allowed text-copy-light">
           <SearchIcon />
         </p>
@@ -172,7 +188,7 @@ const ChannelItems = ({ channel, videos: initialVideos }) => {
                         </button>
 
                         {openModalId === video._id && (
-                          <div className="absolute left-0 top-6 z-50 w-24 rounded-lg bg-foreground">
+                          <div className="absolute right-0 top-6 z-50 w-24 rounded-lg bg-foreground">
                             <Link to={`/video/edit/${video._id}`}>
                               <button className="px-4 py-2 text-left text-copy-light hover:text-copy">
                                 Edit
