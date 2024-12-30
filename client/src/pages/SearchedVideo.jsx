@@ -31,14 +31,14 @@ const SearchedVideo = () => {
       <SideBar />
       <section className="flex h-[calc(100vh-4rem)] flex-1 flex-col overflow-y-auto p-4 scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground">
         {videos.length > 0 ? (
-          <div className="flex cursor-pointer flex-col gap-3">
+          <div className="flex cursor-pointer flex-col gap-4">
             {videos.map((video) => (
               <div
                 key={video._id}
-                className="mx-auto flex w-[90%] items-start gap-3 rounded-lg p-2 transition duration-200 ease-in-out hover:bg-foreground"
+                className="mx-auto flex w-[95%] items-start gap-4 rounded-lg p-2 transition duration-200 ease-in-out hover:bg-foreground"
               >
                 {/* Video Thumbnail */}
-                <div className="h-72 w-2/5 flex-shrink-0">
+                <div className="h-48 flex-shrink-0 md:w-1/2 lg:h-72 lg:w-2/5">
                   <Link to={`/video/${video._id}`}>
                     <img
                       src={video.thumbnail}
@@ -51,7 +51,7 @@ const SearchedVideo = () => {
                 {/* Video Info */}
                 <div className="flex flex-grow flex-col justify-center gap-2">
                   <Link to={`/video/${video._id}`}>
-                    <p className="text-xl font-semibold text-copy">
+                    <p className="text-lg font-semibold text-copy md:text-xl">
                       {video.title}
                     </p>
                   </Link>
@@ -64,10 +64,10 @@ const SearchedVideo = () => {
                     <img
                       src={video.channel.channelAvatar}
                       alt={video.channel.channelName}
-                      className="h-8 w-8 rounded-full"
+                      className="size-8 rounded-full"
                     />
                     <Link to={`/channel/${video.channel._id}`}>
-                      <p className="text-lg text-copy-light">
+                      <p className="text-copy-light md:text-lg">
                         {video.channel.channelName}
                       </p>
                     </Link>
@@ -78,10 +78,9 @@ const SearchedVideo = () => {
                   </p>
                 </div>
 
-                <VerticalThreeDotIcon
-                  className="ml-auto cursor-pointer"
-                  size="32"
-                />
+                <button className="ml-auto">
+                  <VerticalThreeDotIcon />
+                </button>
               </div>
             ))}
           </div>

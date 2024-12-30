@@ -137,15 +137,17 @@ const UpdateVideo = () => {
   };
 
   return (
-    <section className="container mx-auto my-4 w-1/2 space-y-4 rounded-xl bg-foreground p-4">
-      <h1 className="text-center text-3xl font-bold">Update Video</h1>
+    <section className="container mx-auto my-4 w-full space-y-6 rounded-xl bg-foreground px-4 py-6 md:my-8 md:py-8 lg:w-3/5 xl:w-1/2">
+      <h1 className="text-center text-2xl font-bold md:text-3xl">
+        Update Video
+      </h1>
 
-      <form className="mx-auto w-1/2 space-y-6">
+      <form className="space-y-6">
         <div className="flex flex-col gap-2">
-          <label className="text-xl">Video Title:</label>
+          <label className="text-lg md:text-xl">Video Title:</label>
           <input
             type="text"
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-base"
             value={videoName}
             onChange={(e) => setVideoName(e.target.value)}
           />
@@ -154,7 +156,7 @@ const UpdateVideo = () => {
         <div className="flex flex-col gap-2">
           <label className="text-xl">Description:</label>
           <textarea
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-base"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
@@ -163,7 +165,7 @@ const UpdateVideo = () => {
         <div className="flex flex-col gap-2">
           <label className="text-xl">Video Category:</label>
           <select
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-base"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -182,7 +184,7 @@ const UpdateVideo = () => {
           <label className="text-xl">Video Duration:</label>
           <input
             type="time"
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-base"
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
           />
@@ -196,7 +198,7 @@ const UpdateVideo = () => {
           <input
             type="file"
             accept="images/*"
-            className="rounded-lg bg-background p-2 file:rounded-md file:border-0 file:bg-foreground file:px-4 file:py-2 file:text-sm file:font-medium file:text-copy focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm file:rounded-md file:border-0 file:bg-foreground file:px-4 file:py-2 file:text-sm file:font-medium file:text-copy focus:outline-none focus:ring-2 focus:ring-blue-500 md:file:px-6 md:file:py-3"
             onChange={(e) => setVideoThumbnail(e.target.files[0])}
           />
         </div>
@@ -206,14 +208,14 @@ const UpdateVideo = () => {
           <input
             type="file"
             accept="video/*"
-            className="rounded-lg bg-background p-2 file:rounded-md file:border-0 file:bg-foreground file:px-4 file:py-2 file:text-sm file:font-medium file:text-copy focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm file:rounded-md file:border-0 file:bg-foreground file:px-4 file:py-2 file:text-sm file:font-medium file:text-copy focus:outline-none focus:ring-2 focus:ring-blue-500 md:file:px-6 md:file:py-3"
             onChange={(e) => setVideoFile(e.target.files[0])}
           />
         </div>
 
         <button
           type="submit"
-          className="w-full rounded-lg bg-[#ff3533] p-2 text-white transition-colors duration-300 hover:bg-[#ff0200]"
+          className="w-full rounded-lg bg-[#ff3533] py-2 text-sm font-medium text-white transition duration-300 hover:bg-[#ff0200] md:py-3 md:text-base"
           onClick={handleUpdateVideo}
           disabled={isLoading}
         >

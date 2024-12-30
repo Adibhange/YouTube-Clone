@@ -121,54 +121,77 @@ const EditChannel = () => {
   };
 
   return (
-    <section className="container mx-auto my-4 w-1/2 space-y-4 rounded-xl bg-foreground p-4">
-      <h1 className="text-center text-3xl font-bold">Edit Channel</h1>
+    <section className="container mx-auto my-4 w-full space-y-6 rounded-xl bg-foreground px-4 py-6 md:w-3/5 lg:w-1/2">
+      <h1 className="text-center text-2xl font-bold md:text-3xl">
+        Edit Channel
+      </h1>
 
-      <form className="mx-auto w-1/2 space-y-6">
+      <form className="space-y-6">
+        {/* Description Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-xl">Description:</label>
+          <label htmlFor="description" className="text-lg md:text-xl">
+            Description:
+          </label>
           <textarea
             id="description"
             name="description"
             placeholder="Enter your channel description"
             value={description}
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-base"
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
 
+        {/* Channel Banner Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-xl">Channel Banner:</label>
+          <label htmlFor="channelBanner" className="text-lg md:text-xl">
+            Channel Banner:
+          </label>
           {channelBannerPreview && (
-            <img src={channelBannerPreview} alt="Preview" className="h-20" />
+            <img
+              src={channelBannerPreview}
+              alt="Preview"
+              className="h-20 w-full rounded-lg object-cover md:h-32 lg:h-40"
+            />
           )}
           <input
             type="file"
             id="channelBanner"
             name="channelBanner"
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm file:rounded-md file:border-0 file:bg-foreground file:px-4 file:py-2 file:text-sm file:font-medium file:text-copy focus:outline-none focus:ring-2 focus:ring-blue-500 md:file:px-6 md:file:py-3"
             accept="image/*"
             onChange={(e) => setChannelBanner(e.target.files[0])}
           />
         </div>
+
+        {/* Channel Avatar Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-xl">Channel Avatar:</label>
-          {channelAvatarPreview && (
-            <img src={channelAvatarPreview} alt="Preview" className="h-20" />
-          )}
-          <input
-            type="file"
-            id="channelAvatar"
-            name="channelAvatar"
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            accept="image/*"
-            onChange={(e) => setChannelAvatar(e.target.files[0])}
-          />
+          <label htmlFor="channelAvatar" className="text-lg md:text-xl">
+            Channel Avatar:
+          </label>
+          <div className="flex w-full items-center gap-2">
+            {channelAvatarPreview && (
+              <img
+                src={channelAvatarPreview}
+                alt="Preview"
+                className="h-20 w-20 rounded-full object-cover md:h-24 md:w-24"
+              />
+            )}
+            <input
+              type="file"
+              id="channelAvatar"
+              name="channelAvatar"
+              className="w-full rounded-lg bg-background p-2 text-sm file:rounded-md file:border-0 file:bg-foreground file:px-4 file:py-2 file:text-sm file:font-medium file:text-copy focus:outline-none focus:ring-2 focus:ring-blue-500 md:file:px-6 md:file:py-3"
+              accept="image/*"
+              onChange={(e) => setChannelAvatar(e.target.files[0])}
+            />
+          </div>
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full rounded-lg bg-[#ff3533] p-2 text-white transition-colors duration-300 hover:bg-[#ff0200]"
+          className="w-full rounded-lg bg-[#ff3533] py-2 text-sm font-medium text-white transition duration-300 hover:bg-[#ff0200] md:py-3 md:text-base"
           onClick={handleEditChannel}
           disabled={isLoading}
         >

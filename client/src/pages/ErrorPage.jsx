@@ -3,7 +3,7 @@ import NotFound from "../assets/Not-Found.png";
 
 const ErrorPage = () => {
   return (
-    <div className="flex h-screen flex-col items-center justify-center gap-3">
+    <div className="flex h-screen flex-col items-center justify-center gap-4">
       <img src={NotFound} alt="Not Found" />
       <h1>This page isn't available. Sorry about that.</h1>
       <Link to="/">

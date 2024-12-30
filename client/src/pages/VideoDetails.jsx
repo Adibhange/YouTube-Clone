@@ -46,7 +46,7 @@ const VideoDetails = () => {
   const recommendedVideos = allVideos.filter((v) => v._id !== id);
 
   return (
-    <div className="flex flex-col gap-4 px-12 py-4 lg:flex-row">
+    <div className="flex flex-col gap-4 px-6 py-4 md:px-12 lg:flex-row">
       {video && (
         <div className="flex-1 space-y-4">
           {/* Main Video Section */}
@@ -82,7 +82,7 @@ const VideoDetails = () => {
 
       {/* Sidebar: Recommended Videos */}
       <aside className="w-full space-y-2 lg:w-1/3">
-        <h2 className="text-xl font-semibold">Recommended Videos</h2>
+        <h2 className="text-lg font-semibold sm:text-xl">Recommended Videos</h2>
         <div>
           {recommendedVideos.length === 0 ? (
             <p className="text-center text-sm text-copy">No videos found</p>

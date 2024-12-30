@@ -188,14 +188,16 @@ const VideoComment = () => {
               <img
                 src={comment.user.userAvatar}
                 alt={`${comment.user.userName}'s Avatar`}
-                className="h-10 w-10 rounded-full"
+                className="size-8 rounded-full sm:size-10"
               />
               <div className="flex-1">
-                <p className="font-semibold">{comment.user.userName}</p>
-                <p className="text-sm text-copy-lighter">
+                <p className="text-sm font-semibold sm:text-base">
+                  {comment.user.userName}
+                </p>
+                <p className="text-xs text-copy-lighter sm:text-sm">
                   <PublishedAt createdAt={comment.createdAt} />
                 </p>
-                <p className="mt-1">{comment.comment}</p>
+                <p className="mt-1 text-sm sm:text-base">{comment.comment}</p>
               </div>
 
               {comment.user._id === currentUser?.userData._id ? (

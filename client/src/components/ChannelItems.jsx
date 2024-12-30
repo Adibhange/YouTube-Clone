@@ -68,7 +68,7 @@ const ChannelItems = ({ channel, videos: initialVideos }) => {
 
   return (
     <section className="flex h-[calc(100vh-4rem)] flex-1 flex-col overflow-y-auto p-4 scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground">
-      <div className="px-16 py-2">
+      <div className="py-2 lg:px-16">
         <img
           src={channel.channelBanner}
           alt={channel.channelName}
@@ -76,15 +76,17 @@ const ChannelItems = ({ channel, videos: initialVideos }) => {
         />
       </div>
 
-      <div className="flex w-full gap-4 px-16 pb-2 pt-4">
+      <div className="flex w-full gap-4 pb-2 pt-4 lg:px-16">
         <img
           src={channel.channelAvatar}
           alt={channel.channelName}
-          className="h-36 w-36 rounded-full"
+          className="size-32 rounded-full md:size-36"
         />
         <div className="flex w-full flex-col items-start gap-2">
           <div className="flex w-full gap-8">
-            <p className="text-3xl font-bold">{channel.channelName}</p>
+            <p className="text-2xl font-bold sm:text-3xl">
+              {channel.channelName}
+            </p>
             {owner && (
               <button className="rounded-md border-2 border-border px-4 py-1 hover:bg-foreground">
                 <Link to="/edit-channel">Edit Channel</Link>
@@ -104,7 +106,7 @@ const ChannelItems = ({ channel, videos: initialVideos }) => {
         </div>
       </div>
 
-      <div className="flex gap-6 px-16 py-2">
+      <div className="flex gap-4 py-2 lg:gap-6 lg:px-16">
         <p className="cursor-not-allowed text-copy-light">Home</p>
         <p className="cursor-pointer text-copy transition hover:text-copy">
           Videos
@@ -123,7 +125,11 @@ const ChannelItems = ({ channel, videos: initialVideos }) => {
 
       {videos.length > 0 ? (
         <div
-          className={`grid ${isSidebarOpen ? "grid-cols-3" : "grid-cols-4"} container mx-auto w-[90%] gap-4 py-4`}
+          className={`grid ${
+            isSidebarOpen
+              ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+              : "grid-cols-1 sm:grid-cols-3 lg:grid-cols-4"
+          } container mx-auto w-[90%] gap-4 py-4`}
         >
           {videos.map((video) => (
             <article key={video._id} className="flex flex-col gap-2">

@@ -1,10 +1,10 @@
-const Logo = () => (
+const Logo = ({ width = "93", height = "20" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"
     id="yt-ringo2-svg_yt5"
-    width="93"
-    height="20"
+    width={width}
+    height={height}
     viewBox="0 0 93 20"
     focusable="false"
     aria-hidden="true"

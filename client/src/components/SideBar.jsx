@@ -30,7 +30,7 @@ const SideBar = () => {
   const { currentUser } = useSelector((state) => state.user);
   return (
     <aside
-      className={`${isSidebarOpen ? "visible max-w-[15rem] opacity-100" : "invisible max-w-0 opacity-0"} h-[calc(100vh-4rem)] divide-y-2 divide-border overflow-y-auto transition-all duration-300 scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground`}
+      className={`${isSidebarOpen ? "visible max-w-[15rem] opacity-100" : "invisible max-w-0 opacity-0"} hidden h-[calc(100vh-4rem)] divide-y-2 divide-border overflow-y-auto transition-all duration-300 scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground md:block`}
     >
       <div className="p-3">
         <Link

@@ -37,36 +37,40 @@ const SignIn = () => {
   };
 
   return (
-    <section className="container mx-auto my-4 w-1/2 space-y-4 rounded-xl bg-foreground p-4">
-      <h1 className="text-center text-3xl font-bold">Sign In</h1>
+    <section className="container mx-auto my-4 w-full max-w-md space-y-6 rounded-xl bg-foreground px-4 py-6 md:px-6">
+      <h1 className="text-center text-2xl font-bold md:text-3xl">Sign In</h1>
 
-      <form className="mx-auto w-1/2 space-y-6">
+      <form className="space-y-6">
         <div className="flex flex-col gap-2">
-          <label className="text-xl">Email:</label>
+          <label htmlFor="email" className="text-lg md:text-xl">
+            Email:
+          </label>
           <input
             type="email"
             id="email"
             name="email"
             placeholder="Enter your email"
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-base"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label className="text-xl">Password:</label>
+          <label htmlFor="password" className="text-lg md:text-xl">
+            Password:
+          </label>
           <input
             type="password"
             id="password"
             name="password"
             placeholder="Enter your password"
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-base"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
         <button
           type="submit"
-          className="w-full rounded-lg bg-[#ff3533] p-2 text-white transition-colors duration-300 hover:bg-[#ff0200]"
+          className="w-full rounded-lg bg-[#ff3533] py-2 text-sm font-medium text-white transition duration-300 hover:bg-[#ff0200] md:py-3 md:text-base"
           onClick={handleSignIn}
         >
           Sign in
@@ -74,9 +78,9 @@ const SignIn = () => {
       </form>
 
       <hr />
-      <p className="p-2 text-center text-xl text-copy-light">
+      <p className="text-center text-sm text-copy-light md:text-base">
         Don't have an account?
-        <Link to="/sign-up" className="text-blue-500">
+        <Link to="/sign-up" className="ml-1 text-blue-500">
           Sign Up
         </Link>
       </p>

@@ -63,18 +63,18 @@ const VideoPlayer = ({ video }) => {
         <source src={video.videoFile} type="video/mp4" />
       </video>
 
-      <p className="text-xl font-semibold">{video.title}</p>
+      <p className="text-lg font-semibold sm:text-xl">{video.title}</p>
 
       {/* Video Info */}
       <div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           {/* Channel Info */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Link to={`/channel/${video.channel.channelName}`}>
               <img
                 src={video.channel.channelAvatar}
                 alt={video.channel.channelName}
-                className="h-12 w-12 rounded-full"
+                className="size-10 rounded-full sm:size-12"
               />
             </Link>
 
@@ -110,10 +110,10 @@ const VideoPlayer = ({ video }) => {
 
             {/* Other Actions */}
             <div className="flex items-center gap-2">
-              <button className="flex items-center gap-1 rounded-full bg-foreground px-4 py-2 text-copy-light transition hover:text-copy">
+              <button className="hidden items-center gap-1 rounded-full bg-foreground px-4 py-2 text-copy-light transition hover:text-copy sm:flex">
                 <ShareIcon /> <span>Share</span>
               </button>
-              <button className="flex items-center gap-1 rounded-full bg-foreground px-4 py-2 text-copy-light transition hover:text-copy">
+              <button className="hidden items-center gap-1 rounded-full bg-foreground px-4 py-2 text-copy-light transition hover:text-copy sm:flex">
                 <DownloadIcon /> <span>Download</span>
               </button>
               <button className="rounded-full bg-foreground p-2 text-copy-light transition hover:text-copy">

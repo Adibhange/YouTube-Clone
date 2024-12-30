@@ -104,37 +104,41 @@ const UploadVideo = () => {
   };
 
   return (
-    <section className="container mx-auto my-4 w-1/2 space-y-4 rounded-xl bg-foreground p-4">
-      <h1 className="text-center text-3xl font-bold">Upload Video</h1>
+    <section className="container mx-auto my-4 w-full space-y-6 rounded-xl bg-foreground px-4 py-6 md:my-8 md:py-8 lg:w-3/5 xl:w-1/2">
+      <h1 className="text-center text-2xl font-bold md:text-3xl">
+        Upload Video
+      </h1>
 
-      <form className="mx-auto w-1/2 space-y-6">
+      <form className="space-y-6">
         <div className="flex flex-col gap-2">
-          <label className="text-xl">Video Title:</label>
+          <label className="text-lg md:text-xl">Video Title:</label>
           <input
             type="text"
             id="videoName"
             name="videoName"
             placeholder="Enter video name"
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-base"
             onChange={(e) => setVideoName(e.target.value)}
           />
         </div>
+
         <div className="flex flex-col gap-2">
-          <label className="text-xl">Description:</label>
+          <label className="text-lg md:text-xl">Description:</label>
           <textarea
             id="description"
             name="description"
             placeholder="Enter video description"
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-base"
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
+
         <div className="flex flex-col gap-2">
-          <label className="text-xl">Video Category:</label>
+          <label className="text-lg md:text-xl">Video Category:</label>
           <select
             id="category"
             name="category"
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-base"
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="" disabled>
@@ -147,35 +151,38 @@ const UploadVideo = () => {
             ))}
           </select>
         </div>
+
         <div className="flex flex-col gap-2">
-          <label className="text-xl">Video Duration:</label>
+          <label className="text-lg md:text-xl">Video Duration:</label>
           <input
             type="time"
             id="duration"
             name="duration"
             placeholder="Enter video duration"
-            className="rounded-lg bg-background p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-base"
             onChange={(e) => setDuration(e.target.value)}
           />
         </div>
+
         <div className="flex flex-col gap-2">
-          <label className="text-xl">Video Thumbnail:</label>
+          <label className="text-lg md:text-xl">Video Thumbnail:</label>
           <input
             type="file"
             id="thumbnail"
             name="thumbnail"
-            className="rounded-lg bg-background p-2 file:rounded-md file:border-0 file:bg-foreground file:px-4 file:py-2 file:text-sm file:font-medium file:text-copy focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm file:rounded-md file:border-0 file:bg-foreground file:px-4 file:py-2 file:text-sm file:font-medium file:text-copy focus:outline-none focus:ring-2 focus:ring-blue-500 md:file:px-6 md:file:py-3"
             accept="images/*"
             onChange={(e) => setVideoThumbnail(e.target.files[0])}
           />
         </div>
+
         <div className="flex flex-col gap-2">
-          <label className="text-xl">Video File:</label>
+          <label className="text-lg md:text-xl">Video File:</label>
           <input
             type="file"
             id="video"
             name="video"
-            className="rounded-lg bg-background p-2 file:rounded-md file:border-0 file:bg-foreground file:px-4 file:py-2 file:text-sm file:font-medium file:text-copy focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg bg-background p-2 text-sm file:rounded-md file:border-0 file:bg-foreground file:px-4 file:py-2 file:text-sm file:font-medium file:text-copy focus:outline-none focus:ring-2 focus:ring-blue-500 md:file:px-6 md:file:py-3"
             accept="video/*"
             onChange={(e) => setVideoFile(e.target.files[0])}
           />
@@ -183,7 +190,7 @@ const UploadVideo = () => {
 
         <button
           type="submit"
-          className="w-full rounded-lg bg-[#ff3533] p-2 text-white transition-colors duration-300 hover:bg-[#ff0200]"
+          className="w-full rounded-lg bg-[#ff3533] py-2 text-sm font-medium text-white transition duration-300 hover:bg-[#ff0200] md:py-3 md:text-base"
           onClick={handleUploadVideo}
           disabled={isLoading}
         >

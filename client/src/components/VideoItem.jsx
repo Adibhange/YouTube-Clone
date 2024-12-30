@@ -28,7 +28,7 @@ const VideoItem = ({ video }) => {
           <img
             src={video.channel.channelAvatar}
             alt={`Avatar of ${video.channel}`}
-            className="h-10 w-10 rounded-full"
+            className="size-8 rounded-full sm:size-10"
           />
         </Link>
 
@@ -38,7 +38,7 @@ const VideoItem = ({ video }) => {
             {/* Title */}
             <Link
               to={`/video/${video._id}`}
-              className="line-clamp-2 font-medium"
+              className="line-clamp-2 text-base font-medium"
             >
               {video.title}
             </Link>

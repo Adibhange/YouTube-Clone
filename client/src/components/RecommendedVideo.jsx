@@ -32,7 +32,9 @@ const RecommendedVideo = ({ video }) => {
         </p>
       </div>
 
-      <VerticalThreeDotIcon className="ml-auto cursor-pointer text-copy-light" />
+      <button className="ml-auto cursor-pointer text-copy-light">
+        <VerticalThreeDotIcon />
+      </button>
     </div>
   );
 };
