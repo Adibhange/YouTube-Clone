@@ -29,16 +29,16 @@ const SearchedVideo = () => {
   return (
     <div className="flex">
       <SideBar />
-      <section className="flex h-[calc(100vh-4rem)] flex-1 flex-col overflow-y-auto p-4 scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground">
+      <section className="h-[calc(100vh-4rem)] flex-1 overflow-y-auto p-4 scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground">
         {videos.length > 0 ? (
-          <div className="flex cursor-pointer flex-col gap-4">
+          <div className="flex flex-col gap-4">
             {videos.map((video) => (
               <div
                 key={video._id}
-                className="mx-auto flex w-[95%] items-start gap-4 rounded-lg p-2 transition duration-200 ease-in-out hover:bg-foreground"
+                className="mx-auto flex flex-col items-start gap-4 rounded-lg p-2 transition duration-200 ease-in-out hover:bg-foreground lg:w-[95%] lg:flex-row"
               >
                 {/* Video Thumbnail */}
-                <div className="h-48 flex-shrink-0 md:w-1/2 lg:h-72 lg:w-2/5">
+                <div className="h-48 w-full flex-shrink-0 lg:h-56 lg:w-2/5">
                   <Link to={`/video/${video._id}`}>
                     <img
                       src={video.thumbnail}
@@ -50,42 +50,51 @@ const SearchedVideo = () => {
 
                 {/* Video Info */}
                 <div className="flex flex-grow flex-col justify-center gap-2">
-                  <Link to={`/video/${video._id}`}>
-                    <p className="text-lg font-semibold text-copy md:text-xl">
-                      {video.title}
-                    </p>
-                  </Link>
+                  <div className="flex">
+                    <Link to={`/video/${video._id}`}>
+                      <p className="text-base font-semibold text-copy md:text-lg lg:text-xl">
+                        {video.title}
+                      </p>
+                    </Link>
 
-                  <p className="text-xs text-copy-lighter">
-                    {video.views} • <PublishedAt createdAt={video.createdAt} />
+                    <button className="ml-auto lg:hidden">
+                      <VerticalThreeDotIcon />
+                    </button>
+                  </div>
+
+                  <p className="text-xs text-copy-lighter md:text-sm">
+                    {video.views} views •{" "}
+                    <PublishedAt createdAt={video.createdAt} />
                   </p>
 
                   <div className="flex items-center gap-2">
                     <img
                       src={video.channel.channelAvatar}
                       alt={video.channel.channelName}
-                      className="size-8 rounded-full"
+                      className="h-8 w-8 rounded-full"
                     />
                     <Link to={`/channel/${video.channel._id}`}>
-                      <p className="text-copy-light md:text-lg">
+                      <p className="text-sm text-copy-light md:text-base">
                         {video.channel.channelName}
                       </p>
                     </Link>
                   </div>
 
-                  <p className="line-clamp-1 text-xs text-copy-lighter">
+                  <p className="line-clamp-2 text-xs text-copy-lighter md:line-clamp-3">
                     {video.description}
                   </p>
                 </div>
 
-                <button className="ml-auto">
+                <button className="hidden lg:ml-auto lg:block">
                   <VerticalThreeDotIcon />
                 </button>
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-center text-xl">No videos found for "{query}"</p>
+          <p className="text-center text-lg lg:text-xl">
+            No videos found for "{query}"
+          </p>
         )}
       </section>
     </div>
