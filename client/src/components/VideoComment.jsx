@@ -148,7 +148,10 @@ const VideoComment = () => {
       {/* Comment Input Box */}
       <div className="flex items-start gap-3">
         <img
-          src="https://via.placeholder.com/40"
+          src={
+            currentUser?.userData?.userAvatar ||
+            "https://avatar.iran.liara.run/public/"
+          }
           alt="User Avatar"
           className="h-10 w-10 rounded-full"
         />

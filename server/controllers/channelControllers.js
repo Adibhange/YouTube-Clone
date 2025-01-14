@@ -21,16 +21,9 @@ export const createChannel = async (req, res, next) => {
 			return next(new HttpError("You already have a channel", 403));
 		}
 
-		const { channelName, description, channelBanner, category, channelAvatar } =
-			req.body;
+		const { channelName, description, channelBanner, channelAvatar } = req.body;
 
-		if (
-			!channelName ||
-			!description ||
-			!channelBanner ||
-			!category ||
-			!channelAvatar
-		) {
+		if (!channelName || !description || !channelBanner || !channelAvatar) {
 			return next(new HttpError("All fields are required", 400));
 		}
 
@@ -50,7 +43,6 @@ export const createChannel = async (req, res, next) => {
 			channelName,
 			description,
 			channelBanner,
-			category,
 			channelAvatar,
 			subscribers: formatNumber(randomSubscribers),
 			Owner: req.user.userId,

@@ -12,7 +12,7 @@ const VideoItem = ({ video }) => {
           <img
             src={video.thumbnail}
             alt={`Thumbnail of ${video.title}`}
-            className="w-full rounded-lg"
+            className="h-56 w-full rounded-lg"
           />
         </Link>
         {/* Duration */}

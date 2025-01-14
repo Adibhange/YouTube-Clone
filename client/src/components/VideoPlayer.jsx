@@ -9,6 +9,7 @@ import {
 import { useSelector } from "react-redux";
 import axios from "./../../axios.config";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const VideoPlayer = ({ video }) => {
   const { currentUser } = useSelector((state) => state.user);
@@ -20,6 +21,9 @@ const VideoPlayer = ({ video }) => {
   const [likeCount, setLikeCount] = useState(video.likeCount);
 
   const handleLike = async () => {
+    if (!currentUser) {
+      toast.warn("Sign In required to like");
+    }
     try {
       const response = await axios.patch(
         `${import.meta.env.VITE_REACT_APP_BASE_URL}/video/update/likes/${video._id}`,
@@ -55,12 +59,13 @@ const VideoPlayer = ({ video }) => {
     <div className="space-y-4">
       {/* Video Player */}
       <video
+        key={video.videoFile}
         title={video.title}
         className="h-full w-full rounded-lg"
         controls
         autoPlay
       >
-        <source src={video.videoFile} type="video/mp4" />
+        <source src={video?.videoFile} type="video/mp4" />
       </video>
 
       <p className="text-lg font-semibold sm:text-xl">{video.title}</p>

@@ -68,7 +68,9 @@ export const uploadVideo = async (req, res, next) => {
  */
 export const getAllVideo = async (req, res, next) => {
 	try {
-		const videos = await Video.find({}).populate("channel");
+		const videos = await Video.find({})
+			.sort({ updatedAt: -1 })
+			.populate("channel");
 		if (!videos) {
 			return next(new HttpError("No videos found", 404));
 		}
@@ -109,7 +111,9 @@ export const getVideoByCategory = async (req, res, next) => {
 	try {
 		const { category } = req.params;
 
-		const videos = await Video.find({ category }).populate("channel");
+		const videos = await Video.find({ category })
+			.sort({ createdAt: -1 })
+			.populate("channel");
 		if (!videos) {
 			return next(new HttpError("No videos found", 404));
 		}
@@ -151,7 +155,9 @@ export const getChannelVideo = async (req, res, next) => {
 	try {
 		const { channelId } = req.params;
 
-		const videos = await Video.find({ channel: channelId });
+		const videos = await Video.find({ channel: channelId }).sort({
+			updatedAt: -1,
+		});
 		if (!videos) {
 			return next(new HttpError("No videos found", 404));
 		}
